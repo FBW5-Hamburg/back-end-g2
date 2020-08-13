@@ -64,7 +64,7 @@
                             <button type="submit" class="site-btn register-btn" id="submitBtn">REGISTER</button>
                         </form>
                         <div class="switch-login">
-                            <a href="./login.html" class="or-login">Or Login</a>
+                            <a href="/login" class="or-login">Or Login</a>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         },
                         body: JSON.stringify(sendObj)
                     }).then(response => {
-                        // console.log(response.status);
+                         console.log(response.status);
                         if (response.status == 200) {
                             response.json().then(data => {
                                 // console.log(data);
@@ -162,7 +162,7 @@
                                     case 1:
                                         showModal(false, "Register Success",
                                             "you can go to login page...")
-                                        // email.value='';
+                                         email.value='';
                                         password.value = '';
                                         rePassword.value = ''
                                         break;
