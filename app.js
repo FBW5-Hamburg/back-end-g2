@@ -1,5 +1,8 @@
 //================== Require area===============================//
 const express = require('express')
+
+
+const adminRouter = require('./routes/adminRoutes')
 const app = express()
 
 // include dataModule
@@ -11,6 +14,8 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+
+app.use('/admin', adminRouter)
 //======================== end Require area====================================//
 //======================== Routs area=====================================//
 
@@ -23,6 +28,14 @@ app.get('/', (req, res) => {
 app.get('/shop', (req, res) => {
     res.render('shop')
 });
+
+app.get('/admin', (req, res) => {
+    res.render('admin')
+});
+app.get('/addproducts', (req, res) => {
+    res.render('addproducts')
+});
+
 
 app.get('/contact',(req,res)=>{
     res.render('contact')
@@ -56,6 +69,7 @@ app.post('/register',(req,res)=>{
 
     
 })
+
 //========================end  Routs area=====================================//
 
 app.listen(3000, () => {
