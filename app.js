@@ -1,20 +1,27 @@
 //================== Require area===============================//
 const express = require('express')
 const app = express()
+
 // include dataModule
 const dataModule = require('./modules/mongooseDataModule')
+
+
 app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
-
 //======================== end Require area====================================//
 //======================== Routs area=====================================//
 
 //=================================0//
 app.get('/', (req, res) => {
+
     res.render('index')
+
+});
+app.get('/shop', (req, res) => {
+    res.render('shop')
 });
 
 app.get('/contact',(req,res)=>{
