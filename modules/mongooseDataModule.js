@@ -22,8 +22,48 @@ const customersSchema = new Schema({
         required: true
     }
 })
+
+const productSchema = new Schema ({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
+    },
+    imgs: {
+        type: [String],
+        required: true,
+        min: 1
+    },
+    categories: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: String,
+        required: true
+    },
+    size: {
+        type: String,
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    },
+    userid: {
+        type: String,
+        required: true
+    }
+})
 //
 const Customers = mongoose.model('customers', customersSchema)
+const Products = mongoose.model('products', productSchema)
+
+//
+const Customers = mongoose.model('customers', customersSchema)
+
 //=====================  end Require Area===========================//
 //==================== function area========================//
 function connect() {
