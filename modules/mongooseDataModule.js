@@ -6,8 +6,7 @@ const fs = require('fs')
 // require Mongoose
 const mongoose = require('mongoose')
 // getting connection string from data base
-//const connectionString = 'mongodb+srv://user1:MnZd6whfj08ESEh7@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
-const connectionString = 'mongodb+srv://fbw5:PC0TLhjDPwLDEtoc@cluster0.26nmv.mongodb.net/test1?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://user1:MnZd6whfj08ESEh7@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
 
 const Schema = mongoose.Schema
 
@@ -23,6 +22,7 @@ const customersSchema = new Schema({
         required: true
     }
 })
+
 const productSchema = new Schema ({
     name: {
         type: String,
@@ -60,6 +60,10 @@ const productSchema = new Schema ({
 //
 const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
+
+//
+const Customers = mongoose.model('customers', customersSchema)
+
 //=====================  end Require Area===========================//
 //==================== function area========================//
 function connect() {
@@ -136,53 +140,8 @@ function checkCustomer(email,password) {
 
  }
 
- function addProduct (productName, productDescription, productImgs, categories, prise, size, color, userid){
-    return new Promise ((resolve, reject) => {
-        connect().then(() => {
-            Products.findOne({
-                name: productName,
-                userid: userid
-            }).then(findProduct => {
-                if(findProduct) {
-                    reject(3)
-                } else {
-                    const imgsArr = []
-                    productImgs.forEach((img, idx) => {
-                        // get file extension
-                        let ext = img.name.substr(img.name.lastIndexOf('.'))
-                        // set the new image name
-                        let newName = productName.trim().replace(/ /g, '_') + '_' + userid + '_' + idx + ext
-                        img.mv('./public/uploadedfiles/' + newName)
-                        imgsArr.push('/uploadedfiles/' + newName)
-                    });
-                    const newProduct = new Products({
-                        name: productName,
-                        description: productDescription,
-                        imgs: imgsArr,
-                        categories: categories,
-                        prise: prise,
-                        size: size,
-                        color: color,
-                        userid: userid
-                    })
-                    newProduct.save().then(() => {
-                        resolve()
-                    }).catch(error => {
-                        reject(error)
-                    })
-                }
-            }).catch(error => {
-                reject(error)
-            })
-        }).catch(error => {
-            reject(error)
-        })
-    })
- }
-
 module.exports = {
 
     registerCustomer,
-    checkCustomer,
-    addProduct
+    checkCustomer
 }
