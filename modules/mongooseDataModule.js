@@ -23,7 +23,7 @@ const customersSchema = new Schema({
         required: true
     }
 })
-const adminSchema = new Schema ({
+const productSchema = new Schema ({
     name: {
         type: String,
         required: true
@@ -59,7 +59,7 @@ const adminSchema = new Schema ({
 })
 //
 const Customers = mongoose.model('customers', customersSchema)
-const Admin = mongoose.model('admin', adminSchema)
+const Products = mongoose.model('products', productSchema)
 //=====================  end Require Area===========================//
 //==================== function area========================//
 function connect() {
