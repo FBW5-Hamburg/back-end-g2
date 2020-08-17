@@ -42,9 +42,7 @@ app.get('/', (req, res) => {
 app.get('/admin', (req, res) => {
     res.render('admin')
 });
-app.get('/addproducts', (req, res) => {
-    res.render('addproducts')
-});
+
 
 
 app.get('/contact',(req,res)=>{

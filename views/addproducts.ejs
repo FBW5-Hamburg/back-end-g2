@@ -645,9 +645,9 @@
                     </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">Categories</h4>
-                        <!-- <input type="text" class="form-control" id="productCategoriesInp"> -->
+                        <input type="text" class="form-control" id="productCategoriesInp">
                         
-                        <div class="container">                                          
+                        <!-- <div class="container">                                          
                             <div class="dropdown">
                               <button class="btn btn-defult dropdown-toggle" id="productCategoriesInp" type="button" data-toggle="dropdown">Categories
                               </button>
@@ -657,7 +657,7 @@
                                 <li><a href="#">Kids</a></li>
                               </ul>
                             </div>
-                          </div>
+                          </div> -->
                         
                         
                     </div>
@@ -666,7 +666,7 @@
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <input type="text" class="form-control" id="productPriceInp">
+                                    <input type="number" class="form-control" id="productPriceInp">
                                     
                                 </div>
                             </div>
@@ -715,7 +715,7 @@
                                   <li><a href="#">xxl</a></li>
                                 </ul>
                               </div>
-                            </div> --> -->
+                            </div> --> 
                         </div>
                     </div>
                     <button class="btn btn-success mt-3" id="productSaveBtn">save</button>
@@ -957,7 +957,7 @@ style_formats: [{
             const fd = new FormData()
             fd.append('productName', productName)
             fd.append('productDescription', productDescription)
-            fd.append('productDescription', productDescription)
+            
             for(let i = 0; i < productImgs.length; i++){
                 fd.append('productImg' + i, productImgs[i])
             }

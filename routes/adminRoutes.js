@@ -1,13 +1,13 @@
 const express = require('express')
 const dataModule = require('../modules/mongooseDataModule')
 const adminRouter = express.Router()
-adminRouter.use((req, res ,next) => {
-    if (req.session.user) {
-        next()
-    } else {
-        res.redirect('/login')
-    }
-})
+// adminRouter.use((req, res ,next) => {
+//     if (req.session.user) {
+//         next()
+//     } else {
+//         res.redirect('/login')
+//     }
+// })
 adminRouter.get('/', (req, res) => {
     res.render('admin')
 })
@@ -22,7 +22,7 @@ adminRouter.post('/addproducts', (req, res) => {
     // 1 book saved successfuly
     // 2 data error
 //console.log(req.body);
-//console.log(Object.keys( req.files));
+console.log(Object.keys( req.files));
 if (req.files) {
 
 
@@ -42,7 +42,7 @@ if (productName && productDescription && productCategories && productColor && pr
             
         }
     }
-    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, req.session.userid ).then(() => {
+    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, imgs ).then(() => {
         res.json(1)
     }).catch(error => {
         if (error == 3) {

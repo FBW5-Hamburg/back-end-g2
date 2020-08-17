@@ -41,7 +41,7 @@ const productSchema = new Schema ({
         required: true,
     },
     price: {
-        type: String,
+        type: Number,
         required: true
     },
     size: {
@@ -51,11 +51,8 @@ const productSchema = new Schema ({
     color: {
         type: String,
         required: true
-    },
-    userid: {
-        type: String,
-        required: true
     }
+
 })
 //
 const Customers = mongoose.model('customers', customersSchema)
@@ -136,13 +133,13 @@ function checkCustomer(email,password) {
 
  }
 
- function addProduct (productName, productDescription, productImgs, categories, prise, size, color, userid){
+ function addProduct (productName, productDescription, categories, color, prise, size, productImgs){
     return new Promise ((resolve, reject) => {
         connect().then(() => {
             Products.findOne({
-                name: productName,
-                userid: userid
+                name: productName
             }).then(findProduct => {
+                console.log(findProduct);
                 if(findProduct) {
                     reject(3)
                 } else {
@@ -151,7 +148,7 @@ function checkCustomer(email,password) {
                         // get file extension
                         let ext = img.name.substr(img.name.lastIndexOf('.'))
                         // set the new image name
-                        let newName = productName.trim().replace(/ /g, '_') + '_' + userid + '_' + idx + ext
+                        let newName = productName.trim().replace(/ /g, '_') + '_' + idx + ext
                         img.mv('./public/uploadedfiles/' + newName)
                         imgsArr.push('/uploadedfiles/' + newName)
                     });
@@ -162,8 +159,7 @@ function checkCustomer(email,password) {
                         categories: categories,
                         prise: prise,
                         size: size,
-                        color: color,
-                        userid: userid
+                        color: color
                     })
                     newProduct.save().then(() => {
                         resolve()
@@ -175,6 +171,7 @@ function checkCustomer(email,password) {
                 reject(error)
             })
         }).catch(error => {
+            console.log(error);
             reject(error)
         })
     })
