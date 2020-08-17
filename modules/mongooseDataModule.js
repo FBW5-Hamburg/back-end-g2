@@ -6,8 +6,7 @@ const fs = require('fs')
 // require Mongoose
 const mongoose = require('mongoose')
 // getting connection string from data base
-//const connectionString = 'mongodb+srv://user1:MnZd6whfj08ESEh7@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
-const connectionString = 'mongodb+srv://fbw5:PC0TLhjDPwLDEtoc@cluster0.26nmv.mongodb.net/test1?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://user1:MnZd6whfj08ESEh7@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
 
 const Schema = mongoose.Schema
 
@@ -23,6 +22,7 @@ const customersSchema = new Schema({
         required: true
     }
 })
+
 const productSchema = new Schema ({
     name: {
         type: String,
@@ -57,6 +57,10 @@ const productSchema = new Schema ({
 //
 const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
+
+//
+
+
 //=====================  end Require Area===========================//
 //==================== function area========================//
 function connect() {
@@ -133,6 +137,7 @@ function checkCustomer(email,password) {
 
  }
 
+
  function addProduct (productName, productDescription, categories, color, prise, size, productImgs){
     return new Promise ((resolve, reject) => {
         connect().then(() => {
@@ -177,9 +182,10 @@ function checkCustomer(email,password) {
     })
  }
 
+
+
 module.exports = {
 
     registerCustomer,
-    checkCustomer,
-    addProduct
+    checkCustomer
 }

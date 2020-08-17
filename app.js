@@ -18,6 +18,7 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+
 const sessionOptions = {
     secret: 'bookStore',
     cookie: {}
@@ -27,6 +28,8 @@ app.use(cookie())
 app.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }))
+
+
 
 app.use('/admin', adminRouter)
 //======================== end Require area====================================//
