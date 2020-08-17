@@ -9,12 +9,14 @@ const adminRouter = express.Router()
 //     }
 // })
 adminRouter.get('/', (req, res) => {
-    res.render('admin')
+    res.render('admin',{login:req.session.user})
+    console.log(req.session.user
+        );
 })
-adminRouter.get('/addproducts', (req, res) => {
-    res.render('addproducts');
+adminRouter.get('/addProducts', (req, res) => {
+    res.render('addProducts');
 })
-adminRouter.post('/addproducts', (req, res) => {
+adminRouter.post('/addProducts', (req, res) => {
     if(req.files) {
         const productTitle = req.body.productTitle
         const productDescription = req.body.productDescription
@@ -44,5 +46,7 @@ adminRouter.get('/logout', (req, res) => {
     req.session.destroy()
     res.redirect('/login')
 });
+//======================== delete Product============================//
+
 
 module.exports = adminRouter
