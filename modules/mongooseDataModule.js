@@ -187,5 +187,6 @@ function checkCustomer(email,password) {
 module.exports = {
 
     registerCustomer,
-    checkCustomer
+    checkCustomer,
+    addProduct
 }
