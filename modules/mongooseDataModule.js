@@ -30,7 +30,9 @@ const customersSchema = new Schema({
         required:true
     }
 })
-//=====//
+
+
+////////////////////////////////////////////////
 const productSchema = new Schema ({
     name: {
         type: String,
@@ -49,7 +51,7 @@ const productSchema = new Schema ({
         required: true,
     },
     price: {
-        type: Number,
+        type: String,
         required: true
     },
     size: {
@@ -65,17 +67,9 @@ const productSchema = new Schema ({
         required: true
     }
 })
-//===========//
-const Products = mongoose.model('products', productSchema)
-//===========//
-const Customers = mongoose.model('customers', customersSchema)
-//creating users schema
-//  const adminSchema= new Schema({})
-// const admins = mongoose.model('users', adminSchema)
-// //creating Products schema
-// const productsSchema= new Schema({})
-//  const products = mongoose.model('users', productsSchema)
 
+const Customers = mongoose.model('customers', customersSchema)
+const Products = mongoose.model('products', productSchema)
 
 //=====================  end Require Area===========================//
 //==================== function area========================//
@@ -200,17 +194,7 @@ function checkCustomer(email,password) {
         })
     })
  }
- //get Product
-//  function getProduct(id) {
-//      return new Promise((resolve,reject)=>{
-// connect().then(()=>{
-//        products.findOne({_id=id}).then(product=>{
-//            resolve(product)
-//        }).catch(error=>{reject(error)})
-// }).catch((error)=>{reject(error)})
-//      })
-     
-//  }
+
  //delete Product 
 //  function deleteProduct(productId,userId) {
 //      return new Promise((resolve,reject)=>{
