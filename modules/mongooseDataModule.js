@@ -31,10 +31,6 @@ const customersSchema = new Schema({
         type: String,
         required: true
 
-    role:{
-        type:String,
-        required:true
-
     }
 })
 
@@ -110,7 +106,6 @@ function connect() {
 
     })
 }
-
 // register customer and creat an account  
 function registerCustomer(name,email, password) {
     return new Promise((resolve, reject) => {

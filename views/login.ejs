@@ -85,27 +85,27 @@
             <div class="logo-carousel owl-carousel">
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-1.png" alt="">
+                        <img src="/img/logo-carousel/logo-1.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-2.png" alt="">
+                        <img src="/img/logo-carousel/logo-2.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-3.png" alt="">
+                        <img src="/img/logo-carousel/logo-3.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-4.png" alt="">
+                        <img src="/img/logo-carousel/logo-4.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-5.png" alt="">
+                        <img src="/img/logo-carousel/logo-5.png" alt="">
                     </div>
                 </div>
             </div>
@@ -144,17 +144,17 @@
             e.preventDefault()
             const email= document.querySelector('#emailBtn');
             const password=document.querySelector('#passBtn');
-            if (email.value.trim()&&password.value.trim()) {
+            if (email.value.trim() && password.value.trim()) {
                 //declaring the object which we will send to server side
-                const sendObj ={
+                const sendObj = {
                     email:email.value.trim(),
                     password:password.value
                 }
                 //creating fetch function
-                fetch('/login',{
+                fetch('/login', {
                     method:'POST',
                     headers:{
-                        'content-Type':'application/json'
+                        'content-Type': 'application/json'
                     },
                     body:JSON.stringify(sendObj)
                 }).then((response)=>{

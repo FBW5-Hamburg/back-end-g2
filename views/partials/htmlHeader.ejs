@@ -12,7 +12,7 @@
                 </div>
             </div>
             <div class="ht-right">
-                //using if to change login to log out wen the customer login  
+                <!-- //using if to change login to log out wen the customer login   -->
                 <%if (login) {%>
                 <a href="/logout" class="login-panel"><i class="fa fa-user"></i>Logout</a>
                 <%} else {%>
@@ -20,7 +20,7 @@
                     <%}%>
                 <div class="lan-selector">
                     <%if (login) {%>
-                        <span>Hello <%= login.name %></span>
+                        <span style="width: 50px;">Hello <%= login.name %></span>
                         <%}%>
                    
                      <!-- <select class="language_drop" name="countries" id="countries" style="width:300px;">

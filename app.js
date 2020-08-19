@@ -9,14 +9,11 @@ const customerRoutes=require('./routes/customerRoutes')
 const fileupload = require('express-fileupload')
 const cookie = require('cookie-parser')
 const fs = require('fs')
+// let the server to giv the port number or 3000 in local 
+const port = process.env.PORT || 3000
 
-
-const adminRouter = require('./routes/adminRoutes')
 const dataModule = require('./modules/mongooseDataModule')
 const app = express()
-
-
-
 
 app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'ejs');
@@ -26,13 +23,6 @@ app.use(express.json())
 
 const sessionOptions = {
     secret: 'Fashi | Template',
-    cookie: {}
-}
-app.use(session(sessionOptions))
-
-
-const sessionOptions = {
-    secret: 'bookStore',
     cookie: {}
 }
 app.use(session(sessionOptions))
@@ -53,31 +43,20 @@ app.use('/admin', adminRouter)
 
 
 app.get('/', (req, res)=>{
-res.render('index',{login: req.session.user})
-
+    res.render('index',{login: req.session.user})
+})
 //=================================0//
-app.get('/', (req, res) => {
-
-    res.render('index')
-
-});
-
 
 app.get('/admin', (req, res) => {
     res.render('admin')
 });
 
 
-
-
-});
-
 app.get('/contact',(req,res)=>{
     res.render('contact',{login: req.session.user})
 })
 //=======================shop ============================//
 app.get('/shop',(req,res)=>{
- 
     res.render('shop', {login: req.session.user})
 })
 
@@ -96,7 +75,7 @@ app.post('/register',(req,res)=>{
     const email=req.body.email.trim();
     const password =req.body.password;
     const rePassword= req.body.password;
-    if(name&&email&&password&&password==rePassword){
+    if(name && email && password && password == rePassword){
         dataModule.registerCustomer(name,email,password).then(()=>{
             res.json(1)
         }).catch((error)=>{
@@ -149,30 +128,18 @@ app.post('/login',(req,res)=>{
     const logInEmail= req.body.email.trim();
     const logInPassword= req.body.password.trim();
 
-    if(logInEmail&& logInPassword){
+    if(logInEmail && logInPassword){
         dataModule.checkCustomer(logInEmail, logInPassword).then((customer)=>{
-
             req.session.user = customer
-            if (customer.role === "Admin"){
-                res.json(1)
+            if (customer.role === "admin"){
+                res.json(5)
             } else {
-                if (customer.role === "Customer") {
-                     res.json(5)
+                if (customer.role === "customer") {
+                     res.json(1)
                 }
                
             }
-
-          
-            req.session.user = customer
-             if(customer.role==="admin"){
-                 res.json(5)
-             }else if(customer.role==="customer"){res.json(1)}
-                 
-             
-           
-
-})
-       .catch((error)=>{
+}).catch((error)=>{
            if (error==3) {
                res.json(3)
            }else{
@@ -212,6 +179,6 @@ app.get('/shoppingcard',(req,res)=>{
 
 //========================end  Routs area=====================================//
 
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('App listening on port 3000!');
 });
