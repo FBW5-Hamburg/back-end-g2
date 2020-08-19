@@ -3,7 +3,12 @@ const dataModule = require('../modules/mongooseDataModule')
 const adminRouter = express.Router()
 // adminRouter.use((req, res ,next) => {
 //     if (req.session.user) {
-//         next()
+//         if(req.session.user.role === 'Admin') {
+//             next()
+//         } else {
+//             res.redirect('/login')
+//         }
+        
 //     } else {
 //         res.redirect('/login')
 //     }
@@ -43,7 +48,7 @@ if (productName && productDescription && productCategories && productColor && pr
         }
     }
 
-    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, imgs ).then(() => {
+    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, imgs, req.session.user._id).then(() => {
         res.json(1)
     }).catch(error => {
         if (error == 3) {
@@ -59,6 +64,13 @@ if (productName && productDescription && productCategories && productColor && pr
 }
 
 
+})
+adminRouter.get('/myproducts', (req, res) => {
+    dataModule.userProducts(req.session.user._id).then(products => {
+        res.render('myproducts', {products})
+    }).catch(error => {
+        res.send('404. page not found')
+    })
 })
 
 adminRouter.get('/logout', (req, res) => {

@@ -99,7 +99,16 @@ app.post('/login',(req,res)=>{
 
     if(logInEmail&& logInPassword){
         dataModule.checkCustomer(logInEmail, logInPassword).then((customer)=>{
-           res.json(1)
+            req.session.user = customer
+            if (customer.role === "Admin"){
+                res.json(1)
+            } else {
+                if (customer.role === "Customer") {
+                     res.json(5)
+                }
+               
+            }
+          
 })
        .catch((error)=>{
            if (error==3) {
@@ -114,6 +123,12 @@ app.post('/login',(req,res)=>{
 
     
 })
+// app.get('/myproducts', (req, res) => {
+//     dataModule.getAllBooks().then(products => {
+//         res.render('myproducts', {products: products})
+//     })
+    
+// });
 
 //========================end  Routs area=====================================//
 

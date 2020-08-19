@@ -6,7 +6,8 @@ const fs = require('fs')
 // require Mongoose
 const mongoose = require('mongoose')
 // getting connection string from data base
-const connectionString = 'mongodb+srv://user1:MnZd6whfj08ESEh7@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
+
+const connectionString = 'mongodb+srv://FBW-5:yZiPlwogw25pajKs@cluster0.26nmv.mongodb.net/test2?retryWrites=true&w=majority'
 
 const Schema = mongoose.Schema
 
@@ -18,6 +19,10 @@ const customersSchema = new Schema({
         unique: true
     },
     password: {
+        type: String,
+        required: true
+    },
+    role: {
         type: String,
         required: true
     }
@@ -49,6 +54,10 @@ const productSchema = new Schema ({
         required: true
     },
     color: {
+        type: String,
+        required: true
+    },
+    userid: {
         type: String,
         required: true
     }
@@ -138,13 +147,14 @@ function checkCustomer(email,password) {
  }
 
 
- function addProduct (productName, productDescription, categories, color, prise, size, productImgs){
+ function addProduct (productName, productDescription, categories, color, prise, size, productImgs, userid){
     return new Promise ((resolve, reject) => {
         connect().then(() => {
             Products.findOne({
-                name: productName
+                name: productName,
+                userid: userid
             }).then(findProduct => {
-                console.log(findProduct);
+                //console.log(findProduct);
                 if(findProduct) {
                     reject(3)
                 } else {
@@ -153,7 +163,7 @@ function checkCustomer(email,password) {
                         // get file extension
                         let ext = img.name.substr(img.name.lastIndexOf('.'))
                         // set the new image name
-                        let newName = productName.trim().replace(/ /g, '_') + '_' + idx + ext
+                        let newName = productName.trim().replace(/ /g, '_') + '_' + userid + '_' + idx + ext
                         img.mv('./public/uploadedfiles/' + newName)
                         imgsArr.push('/uploadedfiles/' + newName)
                     });
@@ -162,9 +172,10 @@ function checkCustomer(email,password) {
                         description: productDescription,
                         imgs: imgsArr,
                         categories: categories,
-                        prise: prise,
+                        price: prise,
                         size: size,
-                        color: color
+                        color: color,
+                        userid: userid
                     })
                     newProduct.save().then(() => {
                         resolve()
@@ -182,11 +193,49 @@ function checkCustomer(email,password) {
     })
  }
 
+ function getAllProducts() {
+    return new Promise((resolve, reject) => {
+        connect().then(() => {
+            products.find().then(products => {
+                products.forEach(product => {
+                    product['id'] = product['_id']
+                })
+                resolve(products)
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
+function userProducts(userid) {
+    return new Promise((resolve, reject) => {
+        connect().then(() => {
+            products.find({
+                userid: userid
+            }).then(products => {
+                products.forEach(product => {
+                    product['id'] = product['_id']
+                })
+                resolve(products)
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
+
 
 
 module.exports = {
 
     registerCustomer,
     checkCustomer,
-    addProduct
+    addProduct,
+    getAllProducts,
+    userProducts
 }
