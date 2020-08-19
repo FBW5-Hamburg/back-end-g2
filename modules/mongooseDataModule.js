@@ -24,6 +24,10 @@ const customersSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    role:{
+        type:String,
+        required:true
     }
 })
 //
@@ -64,7 +68,8 @@ function registerCustomer(name,email, password) {
             const newCustomers = new Customers({
                 name:name,
                 email: email,
-                password: passwordHash.generate(password)
+                password: passwordHash.generate(password),
+                role:'customer'
             })
             newCustomers.save().then((result) => {
                 resolve(result)

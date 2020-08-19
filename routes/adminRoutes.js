@@ -1,13 +1,18 @@
 const express = require('express')
 //const dataModule = require('')
 const adminRouter = express.Router()
-// adminRouter.use((req, res ,next) => {
-//     if (req.session.user) {
-//         next()
-//     } else {
-//         res.redirect('/login')
-//     }
-// })
+adminRouter.use((req, res ,next) => {
+    if (req.session.user) {
+     if (req.session.user.role==='admin'){
+         next()
+        }else {
+            res.redirect('/login')
+        }
+        
+    } else {
+        res.redirect('/login')
+    }
+})
 adminRouter.get('/', (req, res) => {
     res.render('admin',{login:req.session.user})
     console.log(req.session.user

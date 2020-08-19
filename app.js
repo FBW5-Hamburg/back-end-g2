@@ -72,6 +72,17 @@ app.post('/register',(req,res)=>{
     }
 
 })
+
+//req.session.user = customer
+//if (customer.role === "Admin"){
+//     res.json(1)
+// } else {
+//     if (customer.role === "Customer") {
+//          res.json(5)
+//     }
+   
+// }
+
 //======================== login================================//
 //1=success or exist 
 //2= missing entry
@@ -86,14 +97,13 @@ app.get('/login',(req,res)=>{
      }
   
 })
-app.get('/category/:cat', (req, res) => {
-    const category = req.params.cat
-    res.send(category)
-})
-app.get('/logout',(req,res)=>{
-    req.session.destroy()
-    res.redirect('/login')
-})
+//=============================================//
+// app.get('/category/:cat', (req, res) => {
+//     const category = req.params.cat
+//     res.send(category)
+// })
+//=================================================//
+
 app.post('/login',(req,res)=>{
     // console.log(req.body);
     const logInEmail= req.body.email.trim();
@@ -101,9 +111,14 @@ app.post('/login',(req,res)=>{
 
     if(logInEmail&& logInPassword){
         dataModule.checkCustomer(logInEmail, logInPassword).then((customer)=>{
-           
+          
             req.session.user = customer
-           res.json(1)
+             if(customer.role==="admin"){
+                 res.json(5)
+             }else if(customer.role==="customer"){res.json(1)}
+                 
+             
+           
 })
        .catch((error)=>{
            if (error==3) {
@@ -118,11 +133,16 @@ app.post('/login',(req,res)=>{
 
     
 })
-//  show product page
+//=================== logout====================//
+app.get('/logout',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/login')
+})
+// ================== show product page===============//
 app.get('/showproduct',(req,res)=>{
     res.render('showproduct',{login:req.session.user})
 })
-//shopping_card page
+//==================shopping_card page================//
 app.get('/shoppingcard',(req,res)=>{
     res.render('shoppingcard',{login:req.session.user})
 })

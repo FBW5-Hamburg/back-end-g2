@@ -164,7 +164,7 @@
                             switch (data) {
                                 case 1:
                                      window.location = '/'
-                                    
+                                    name.value=''
                                     email.value='';
                                     password.value=''
 
@@ -177,7 +177,14 @@
                                     break;
                                 case 4:
                                     showModal(true, "Server Error", "Something unexpected happened. please contact the system Adminstrator")
-                                    break;
+                                   
+                                    case 5:
+                                    
+                                    window.location = '/admin'
+                                    name.value=''
+                                    email.value='';
+                                    password.value=''
+                                     break;
                             
                                 default:
                                     showModal(true, "Server Error", "Something unexpected happened. please contact the system Adminstrator")
