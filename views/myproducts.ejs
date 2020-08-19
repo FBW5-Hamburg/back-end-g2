@@ -23,11 +23,7 @@
     </div>
 
     <!-- Header Section Begin -->
-
     <%- include('partials/htmlHeader')%>
-
-    <%- include('partials/htmlHeader',{login})%>
-
     <!-- Header End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -46,10 +42,10 @@
     <!-- Breadcrumb Section Begin -->
 
     <!-- Product Shop Section Begin -->
-    <!-- <section class="product-shop spad">
+    <section class="product-shop spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                <!-- <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                     <div class="filter-widget">
                         <h4 class="fw-title">Categories</h4>
                         <ul class="filter-catagories">
@@ -171,7 +167,7 @@
                             <a href="#">Backpack</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-show-option">
                         <div class="row">
@@ -190,12 +186,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-list">
+                    <section class="static about-sec">
+                        <div class="container">
+                           
+                            <h2>My Products</h2>
+                            <div class="recent-book-sec">
+                                <div class="row">
+                                    <%for (let i = 0; i < products.length; i++){%>
+                                    <div class="col-md-3">
+                                        <div class="item">
+                                            <img class="productimage" src="<%= products[i].imgs[0]%>" alt="img">
+                                            <h3><a href="/admin/myproducts/<%=products[i].id%>"><%= products[i].title%></a></h3>
+                                            <h6><a href="/admin/myproducts/<%=products[i].id%>">Download</a></h6>
+                                        </div>
+                                    </div>
+                                    <%}%>
+                                </div>
+                                <div class="btn-sec">
+                                    <button class="btn gray-btn">load More Products</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- <div class="product-list">
+
                         <div class="row">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-1.jpg" alt="">
+                                        <img src="/img/products/product-1.jpg" alt="">
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
@@ -221,7 +240,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-2.jpg" alt="">
+                                        <img src="/img/products/product-2.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -246,7 +265,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-3.jpg" alt="">
+                                        <img src="/img/products/product-3.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -271,7 +290,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-4.jpg" alt="">
+                                        <img src="/img/products/product-4.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -296,7 +315,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-5.jpg" alt="">
+                                        <img src="/img/products/product-5.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -321,7 +340,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-6.jpg" alt="">
+                                        <img src="/img/products/product-6.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -346,7 +365,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-7.jpg" alt="">
+                                        <img src="/img/products/product-7.jpg" alt="">
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
@@ -372,7 +391,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-8.jpg" alt="">
+                                        <img src="/img/products/product-8.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -397,7 +416,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="img/products/product-9.jpg" alt="">
+                                        <img src="/img/products/product-9.jpg" alt="">
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
@@ -420,7 +439,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="loading-more">
                         <i class="icon_loading"></i>
                         <a href="#">
@@ -430,436 +449,49 @@
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
     <!-- Product Shop Section End -->
 
     <!-- Partner Logo Section Begin -->
-    <!-- <div class="partner-logo">
+    <div class="partner-logo">
         <div class="container">
             <div class="logo-carousel owl-carousel">
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-1.png" alt="">
+                        <img src="/img/logo-carousel/logo-1.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-2.png" alt="">
+                        <img src="/img/logo-carousel/logo-2.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-3.png" alt="">
+                        <img src="/img/logo-carousel/logo-3.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-4.png" alt="">
+                        <img src="/img/logo-carousel/logo-4.png" alt="">
                     </div>
                 </div>
                 <div class="logo-item">
                     <div class="tablecell-inner">
-                        <img src="img/logo-carousel/logo-5.png" alt="">
+                        <img src="/img/logo-carousel/logo-5.png" alt="">
                     </div>
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Partner Logo Section End -->
 
     <!-- Footer Section Begin -->
-
-    <section class="static about-sec">
-        <div class="container">
-            <h1>My Account / Add Product</h1>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's printer took a galley of type and scrambled it to make a type specimen book. It has survived
-                not only fiveLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem </p>
-            <div class="form">
-                <form>
-                    <div class="form-group">
-                        <label for="productNameInp"><h4>Product Name</h4></label>
-                        <input type="text" class="form-control" id="productNameInp" placeholder="Product Title">
-                    </div>
-                    <div class="form-group">
-                        <label for="productImgsInp"><h4>Product Images</h4></label>
-                        <input type="file" class="form-control-file" multiple id="productImgsInp"
-                            accept="image/x-png,image/gif,image/jpeg">
-                    </div>
-                    <div class="form-group">
-                        <label for="productDescriptionInp"><h4>Product Description</h4></label>
-                        <textarea class="form-control" id="productDescriptionInp"></textarea>
-                    </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Categories</h4>
-
-                        <input type="text" class="form-control" id="productCategoriesInp">
-
-
-                        <!-- <input type="text" class="form-control" id="productCategoriesInp"> -->
-
-                        
-                        <!-- <div class="container">                                          
-                            <div class="dropdown">
-                              <button class="btn btn-defult dropdown-toggle" id="productCategoriesInp" type="button" data-toggle="dropdown">Categories
-                              </button>
-                              <ul class="dropdown-menu">
-                                <li><a href="#">Men</a></li>
-                                <li><a href="#">Women</a></li>
-                                <li><a href="#">Kids</a></li>
-                              </ul>
-                            </div>
-                          </div> -->
-                        
-                        
-
-                        <!-- <ul class="filter-catagories">
-                            <li><a href="#">Men</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Kids</a></li>
-                        </ul> -->
-
-                    </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Price</h4>
-                        <div class="filter-range-wrap">
-                            <div class="range-slider">
-                                <div class="price-input">
-
-                                    <input type="number" class="form-control" id="productPriceInp">
-
-                                    <!-- <input type="text" id="minamount"> -->
-
-                                    
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Color</h4>
-                        <div class="fw-color-choose">
-
-                            <input type="text" class="form-control" id="productColorInp">
-                            <!-- <div class="container">                                          
-                                <div class="dropdown">
-                                  <button class="btn btn-defult dropdown-toggle" id="productColorInp" type="button" data-toggle="dropdown">Colors
-                                  </button>
-                                  <ul class="dropdown-menu">
-                                    <li><a href="#">Black</a></li>
-                                    <li><a href="#">Red</a></li>
-                                    <li><a href="#">White</a></li>
-                                    <li><a href="#">Voliate</a></li>
-                                    <li><a href="#">Blue</a></li>
-                                    <li><a href="#">Green</a></li>
-                                    <li><a href="#">Rose</a></li>
-                                    <li><a href="#">Gray</a></li>
-                                    <li><a href="#">Cyan</a></li>
-                                    <li><a href="#">Lilac</a></li>
-                                    <li><a href="#">Navy blue</a></li>
-                                  </ul>
-                                </div>
-                              </div> -->
-
-                            <!-- <div class="cs-item">
-                                <input type="radio" id="cs-black">
-                                <label class="cs-black" for="cs-black">Black</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-violet">
-                                <label class="cs-violet" for="cs-violet">Violet</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-blue">
-                                <label class="cs-blue" for="cs-blue">Blue</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-yellow">
-                                <label class="cs-yellow" for="cs-yellow">Yellow</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-red">
-                                <label class="cs-red" for="cs-red">Red</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-green">
-                                <label class="cs-green" for="cs-green">Green</label>
-                            </div> -->
-
-                        </div>
-                    </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Size</h4>
-                        <div class="fw-size-choose">
-
-                            <input type="text" class="form-control" id="productSizeInp">
-                            <!-- <div class="dropdown">
-                                <button class="btn btn-defult dropdown-toggle" id="productSizeInp" type="button" data-toggle="dropdown">Sizes
-                                </button>
-                                <!-- <span class="caret"></span> -->
-                                <!-- <ul class="dropdown-menu">
-                                  <li><a href="#">xs</a></li>
-                                  <li><a href="#">s</a></li>
-                                  <li><a href="#">m</a></li>
-                                  <li><a href="#">l</a></li>
-                                  <li><a href="#">xl</a></li>
-                                  <li><a href="#">xxl</a></li>
-                                </ul>
-                              </div>
-
-                            </div> --> 
-
-                            <!-- </div>
-
-                            <div class="sc-item">
-                                <input type="radio" id="s-size">
-                                <label for="s-size">s</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="m-size">
-                                <label for="m-size">m</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="l-size">
-                                <label for="l-size">l</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="xs-size">
-                                <label for="xs-size">xs</label>
-                            </div>-->
-                        </div> 
-                    </div>
-                    <button class="btn btn-success mt-3" id="productSaveBtn">save</button>
-                </form>
-            </div>
-        </div>
-        
-    </section>
-    <br> 
-    <br>
     <%- include('partials/htmlFooter')%>
     <!-- Footer Section End -->
 
     <!-- Js Plugins -->
     <%- include('partials/htmlJs')%> 
-
-    <script src="/tinymce/tinymce.min.js"></script>
-    <script>
-         tinymce.init({
-
-selector: '#productDescriptionInp',
-/* theme of the editor */
-theme: "silver",
-skin: "oxide-dark",
-
-/* width and height of the editor */
-width: "100%",
-height: 300,
-
-/* display statusbar */
-statubar: true,
-
-/* plugin */
-plugins: [
-    "advlist autolink link image lists charmap print preview hr anchor pagebreak",
-    "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
-    "save table contextmenu directionality emoticons template paste textcolor"
-],
-
-/* toolbar */
-toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons",
-
-/* style */
-style_formats: [{
-        title: "Headers",
-        items: [{
-                title: "Header 1",
-                format: "h1"
-            },
-            {
-                title: "Header 2",
-                format: "h2"
-            },
-            {
-                title: "Header 3",
-                format: "h3"
-            },
-            {
-                title: "Header 4",
-                format: "h4"
-            },
-            {
-                title: "Header 5",
-                format: "h5"
-            },
-            {
-                title: "Header 6",
-                format: "h6"
-            }
-        ]
-    },
-    {
-        title: "Inline",
-        items: [{
-                title: "Bold",
-                icon: "bold",
-                format: "bold"
-            },
-            {
-                title: "Italic",
-                icon: "italic",
-                format: "italic"
-            },
-            {
-                title: "Underline",
-                icon: "underline",
-                format: "underline"
-            },
-            {
-                title: "Strikethrough",
-                icon: "strikethrough",
-                format: "strikethrough"
-            },
-            {
-                title: "Superscript",
-                icon: "superscript",
-                format: "superscript"
-            },
-            {
-                title: "Subscript",
-                icon: "subscript",
-                format: "subscript"
-            },
-            {
-                title: "Code",
-                icon: "code",
-                format: "code"
-            }
-        ]
-    },
-    {
-        title: "Blocks",
-        items: [{
-                title: "Paragraph",
-                format: "p"
-            },
-            {
-                title: "Blockquote",
-                format: "blockquote"
-            },
-            {
-                title: "Div",
-                format: "div"
-            },
-            {
-                title: "Pre",
-                format: "pre"
-            }
-        ]
-    },
-    {
-        title: "Alignment",
-        items: [{
-                title: "Left",
-                icon: "alignleft",
-                format: "alignleft"
-            },
-            {
-                title: "Center",
-                icon: "aligncenter",
-                format: "aligncenter"
-            },
-            {
-                title: "Right",
-                icon: "alignright",
-                format: "alignright"
-            },
-            {
-                title: "Justify",
-                icon: "alignjustify",
-                format: "alignjustify"
-            }
-        ]
-    }
-]
-});
-
-
-
-        document.querySelector('#productSaveBtn').addEventListener('click', (e) => {
-            e.preventDefault()
-            const productName = document.querySelector('#productNameInp').value
-            const productDescription = tinymce.get("productDescriptionInp").getContent();
-            const productImgs = document.querySelector('#productImgsInp').files
-            const productCategories = document.querySelector('#productCategoriesInp').value
-            const productColor = document.querySelector('#productColorInp').value
-            const productPrice = document.querySelector('#productPriceInp').value
-            const productSize = document.querySelector('#productSizeInp').value
-            const fd = new FormData()
-            fd.append('productName', productName)
-            fd.append('productDescription', productDescription)
-            
-            for(let i = 0; i < productImgs.length; i++){
-                fd.append('productImg' + i, productImgs[i])
-            }
-            fd.append('productCategories', productCategories)
-            fd.append('productColor', productColor)
-            fd.append('productPrice', productPrice)
-            fd.append('productSize', productSize)
-            let url ='/admin/addproducts'
-            fetch(url, {
-                method: 'POST',
-                body: fd
-            }).then(response => {
-                console.log(response);
-                if(response.status == 200){
-                    response.json().then(data => {
-                        console.log(data);
-                    })
-                }
-            })
-        })
-    </script>
-    <script>
-        function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-    $(".dropdown-menu li a").click(function(){
-
-       $(".btn:first-child").text($(this).text());
-       $(".btn:first-child").val($(this).text());
-
-    });
-    $(".dropdown-menu1 li a").click(function(){
-
-$(".btn:first-child").text($(this).text());
-$(".btn:first-child").val($(this).text());
-
-});
-$(".dropdown-menu2 li a").click(function(){
-
-$(".btn:first-child").text($(this).text());
-$(".btn:first-child").val($(this).text());
-
-});
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 </body>
 
 </html>

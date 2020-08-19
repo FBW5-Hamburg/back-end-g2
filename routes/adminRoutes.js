@@ -1,6 +1,20 @@
 const express = require('express')
-//const dataModule = require('')
+const dataModule = require('../modules/mongooseDataModule')
 const adminRouter = express.Router()
+
+// adminRouter.use((req, res ,next) => {
+//     if (req.session.user) {
+//         if(req.session.user.role === 'Admin') {
+//             next()
+//         } else {
+//             res.redirect('/login')
+//         }
+        
+//     } else {
+//         res.redirect('/login')
+//     }
+// })
+
 adminRouter.use((req, res ,next) => {
     if (req.session.user) {
 
@@ -17,6 +31,7 @@ adminRouter.use((req, res ,next) => {
         res.redirect('/login')
     }
 })
+
 adminRouter.get('/', (req, res) => {
     res.render('admin',{login:req.session.user})
     console.log(req.session.user
@@ -37,7 +52,7 @@ adminRouter.post('/addproducts', (req, res) => {
     // 1 book saved successfuly
     // 2 data error
 //console.log(req.body);
-//console.log(Object.keys( req.files));
+console.log(Object.keys( req.files));
 if (req.files) {
 
 
@@ -54,6 +69,7 @@ if (productName && productDescription && productCategories && productColor && pr
     for (const key in req.files) {
         if (req.files[key].mimetype == 'image/jpeg') {
             imgs.push(req.files[key])
+
             
 
 
@@ -77,12 +93,11 @@ if (productName && productDescription && productCategories && productColor && pr
         } else {
             res.json(2)
 
+
         }
-    } else {
-        res.json(2)
     }
 
-    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, req.session.userid ).then(() => {
+    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, imgs, req.session.user._id).then(() => {
         res.json(1)
     }).catch(error => {
         if (error == 3) {
@@ -98,6 +113,13 @@ if (productName && productDescription && productCategories && productColor && pr
 }
 
 
+})
+adminRouter.get('/myproducts', (req, res) => {
+    dataModule.userProducts(req.session.user._id).then(products => {
+        res.render('myproducts', {products})
+    }).catch(error => {
+        res.send('404. page not found')
+    })
 })
 
 adminRouter.get('/logout', (req, res) => {
