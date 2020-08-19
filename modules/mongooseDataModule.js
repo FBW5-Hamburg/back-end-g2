@@ -13,6 +13,10 @@ const Schema = mongoose.Schema
 
 //  creating Schema
 const customersSchema = new Schema({
+    name:{
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,
@@ -22,9 +26,15 @@ const customersSchema = new Schema({
         type: String,
         required: true
     },
+
     role: {
         type: String,
         required: true
+
+    role:{
+        type:String,
+        required:true
+
     }
 })
 
@@ -70,6 +80,16 @@ const Products = mongoose.model('products', productSchema)
 //
 
 
+//creating users schema
+//  const adminSchema= new Schema({})
+// const admins = mongoose.model('users', adminSchema)
+// //creating Products schema
+// const productsSchema= new Schema({})
+//  const products = mongoose.model('users', productsSchema)
+
+
+
+
 //=====================  end Require Area===========================//
 //==================== function area========================//
 function connect() {
@@ -92,12 +112,14 @@ function connect() {
 }
 
 // register customer and creat an account  
-function registerCustomer(email, password) {
+function registerCustomer(name,email, password) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
             const newCustomers = new Customers({
+                name:name,
                 email: email,
-                password: passwordHash.generate(password)
+                password: passwordHash.generate(password),
+                role:'customer'
             })
             newCustomers.save().then((result) => {
                 resolve(result)
@@ -145,6 +167,37 @@ function checkCustomer(email,password) {
     })
 
  }
+ //get Product
+//  function getProduct(id) {
+//      return new Promise((resolve,reject)=>{
+// connect().then(()=>{
+//        products.findOne({_id=id}).then(product=>{
+//            resolve(product)
+//        }).catch(error=>{reject(error)})
+// }).catch((error)=>{reject(error)})
+//      })
+     
+//  }
+ //delete Product 
+//  function deleteProduct(productId,userId) {
+//      return new Promise((resolve,reject)=>{
+//         getProduct(productId).then(product=>{
+//             //delete imgs from publics folder
+//             if (product.userid==userId) {
+//                 product.imgs.forEach(img => {
+//                     if(fs.existsSync('./public'+ img)){
+//                         fs.unlinkSync('./public'+img)
+//                     }
+//                 });  
+                //deleting the product from Database( products) the database name 
+                // products.deleteOne()
+
+//             }
+//         })
+//      })
+//  }
+
+
 
 
  function addProduct (productName, productDescription, categories, color, prise, size, productImgs, userid){
