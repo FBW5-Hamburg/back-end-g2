@@ -23,7 +23,7 @@
     </div>
 
     <!-- Header Section Begin -->
-    <%- include('partials/htmlHeader')%>
+    <%- include('partials/htmlHeader',{login})%>
     <!-- Header End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -50,15 +50,19 @@
                         <h2>Register</h2>
                         <form action="#">
                             <div class="group-input">
-                                <label for="username">Email address *</label>
+                                <label for="nameInp">Name *</label>
+                                <input type="text" id="nameInp">
+                            </div>
+                            <div class="group-input">
+                                <label for="emailInp">Email address *</label>
                                 <input type="text" id="emailInp">
                             </div>
                             <div class="group-input">
-                                <label for="pass">Password *</label>
+                                <label for="passInp">Password *</label>
                                 <input type="text" id="passInp">
                             </div>
                             <div class="group-input">
-                                <label for="con-pass">Confirm Password *</label>
+                                <label for="con-passInp">Confirm Password *</label>
                                 <input type="text" id="con-passInp">
                             </div>
                             <button type="submit" class="site-btn register-btn" id="submitBtn">REGISTER</button>
@@ -135,12 +139,14 @@
         <script>
             document.querySelector('#submitBtn').addEventListener('click', e => {
                 e.preventDefault();
+                const name = document.querySelector('#nameInp')
                 const email = document.querySelector('#emailInp');
                 const password = document.querySelector('#passInp');
                 const rePassword = document.querySelector('#con-passInp');
                 if (email.value.trim() && password.value.trim() && password.value === rePassword.value) {
                     //creating sind Object
                     const sendObj = {
+                        name:name.value.trim(),
                         email: email.value.trim(),
                         password: password.value.trim(),
                         rePassword: rePassword.value.trim()

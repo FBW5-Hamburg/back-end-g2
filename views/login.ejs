@@ -23,7 +23,7 @@
     </div>
 
     <!-- Header Section Begin -->
-    <%- include('partials/htmlHeader')%>
+    <%- include('partials/htmlHeader',{login})%>
     <!-- Header End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -141,6 +141,7 @@
     <script>
         // select sign in Button
         document.querySelector('#signInBtn').addEventListener('click',e=>{
+            e.preventDefault()
             const email= document.querySelector('#emailBtn');
             const password=document.querySelector('#passBtn');
             if (email.value.trim()&&password.value.trim()) {
@@ -162,8 +163,8 @@
                         response.json().then(data=>{
                             switch (data) {
                                 case 1:
-                                    // window.location = '/admin'
-                                    
+                                     window.location = '/'
+                                    name.value=''
                                     email.value='';
                                     password.value=''
 
@@ -176,7 +177,14 @@
                                     break;
                                 case 4:
                                     showModal(true, "Server Error", "Something unexpected happened. please contact the system Adminstrator")
-                                    break;
+                                   
+                                    case 5:
+                                    
+                                    window.location = '/admin'
+                                    name.value=''
+                                    email.value='';
+                                    password.value=''
+                                     break;
                             
                                 default:
                                     showModal(true, "Server Error", "Something unexpected happened. please contact the system Adminstrator")

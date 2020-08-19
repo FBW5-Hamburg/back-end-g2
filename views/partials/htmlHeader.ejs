@@ -12,14 +12,23 @@
                 </div>
             </div>
             <div class="ht-right">
-                <a href="/login" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                //using if to change login to log out wen the customer login  
+                <%if (login) {%>
+                <a href="/logout" class="login-panel"><i class="fa fa-user"></i>Logout</a>
+                <%} else {%>
+                    <a href="/login" class="login-panel"><i class="fa fa-user"></i>Login</a>
+                    <%}%>
                 <div class="lan-selector">
-                    <select class="language_drop" name="countries" id="countries" style="width:300px;">
+                    <%if (login) {%>
+                        <span>Hello <%= login.name %></span>
+                        <%}%>
+                   
+                     <!-- <select class="language_drop" name="countries" id="countries" style="width:300px;">
                         <option value='yt' data-image="/img/flag-1.jpg" data-imagecss="flag yt"
                             data-title="English">English</option>
                         <option value='yu' data-image="/img/flag-2.jpg" data-imagecss="flag yu"
-                            data-title="Bangladesh">German </option>
-                    </select>
+                            data-title="Bangladesh">German </option> -->
+                    </select> 
                 </div>
                 <div class="top-social">
                     <a href="#"><i class="ti-facebook"></i></a>
@@ -98,7 +107,7 @@
                                     <h5>$120.00</h5>
                                 </div>
                                 <div class="select-button">
-                                    <a href="#" class="primary-btn view-card">VIEW CARD</a>
+                                    <a href="/shoppingcard" class="primary-btn view-card">VIEW CARD</a>
                                     <a href="#" class="primary-btn checkout-btn">CHECK OUT</a>
                                 </div>
                             </div>
@@ -129,24 +138,28 @@
             </div>-->
             <nav class="nav-menu mobile-menu" style="padding-left:150px ;">
                 <ul>
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/shop">Shop</a></li>
-                    <li><a href="#">Collection</a>
+                    <li class="navLi"><a href="/">Home</a></li>
+                    <li  class="navLi"><a href="/shop">Shop</a></li>
+                    <li  class="navLi"><a href="#">Collection</a>
                         <ul class="dropdown">
-                            <li><a href="#">Men's</a></li>
-                            <li><a href="#">Women's</a></li>
-                            <li><a href="#">Kid's</a></li>
+                            <li><a href="/category/men">Men's</a></li>
+                            <li><a href="/category/women">Women's</a></li>
+                            <li><a href="/category/kids">Kid's</a></li>
                         </ul>
                     </li>
                     <!-- <li><a href="./blog.html">Blog</a></li> -->
-                    <li><a href="/contact">Contact</a></li>
-                    <li><a href="#">your account</a>
+                    <li  class="navLi"><a href="/contact">Contact</a></li>
+                    <li  class="navLi"><a href="#">your account</a>
                         <ul class="dropdown">
                             <li><a href="/register">Register</a></li>
                             <!-- <li><a href="./blog-details.html">Blog Details</a></li> -->
                             <!-- <li><a href="./shopping-cart.html">Shopping Cart</a></li> -->
-                            <li><a href="./check-out.html">Checkout</a></li>
-                            <li><a href="/login">Login</a></li>
+                            <li  class="navLi"><a href="./check-out.html">Checkout</a></li>
+                            <%if (login) {%>
+                            <li ><a href="/logout">Logout</a></li>
+                            <%} else {%>
+                                <li><a href="/login">Login</a></li>
+                            <%}%>
                             <!-- <li><a href="./faq.html">Faq</a></li> -->
                         </ul>
                     </li>
