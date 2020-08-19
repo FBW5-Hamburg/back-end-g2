@@ -30,7 +30,44 @@ const customersSchema = new Schema({
         required:true
     }
 })
-//
+//=====//
+const productSchema = new Schema ({
+    name: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
+    },
+    imgs: {
+        type: [String],
+        required: true,
+        min: 1
+    },
+    categories: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    size: {
+        type: String,
+        required: true
+    },
+    color: {
+        type: String,
+        required: true
+    },
+    userid: {
+        type: String,
+        required: true
+    }
+})
+//===========//
+const Products = mongoose.model('products', productSchema)
+//===========//
 const Customers = mongoose.model('customers', customersSchema)
 //creating users schema
 //  const adminSchema= new Schema({})
@@ -117,6 +154,52 @@ function checkCustomer(email,password) {
     })
 
  }
+
+ function addProduct (productName, productDescription, categories, color, prise, size, productImgs, userid){
+    return new Promise ((resolve, reject) => {
+        connect().then(() => {
+            Products.findOne({
+                name: productName,
+                userid: userid
+            }).then(findProduct => {
+                //console.log(findProduct);
+                if(findProduct) {
+                    reject(3)
+                } else {
+                    const imgsArr = []
+                    productImgs.forEach((img, idx) => {
+                        // get file extension
+                        let ext = img.name.substr(img.name.lastIndexOf('.'))
+                        // set the new image name
+                        let newName = productName.trim().replace(/ /g, '_') + '_' + userid + '_' + idx + ext
+                        img.mv('./public/uploadedfiles/' + newName)
+                        imgsArr.push('/uploadedfiles/' + newName)
+                    });
+                    const newProduct = new Products({
+                        name: productName,
+                        description: productDescription,
+                        imgs: imgsArr,
+                        categories: categories,
+                        price: prise,
+                        size: size,
+                        color: color,
+                        userid: userid
+                    })
+                    newProduct.save().then(() => {
+                        resolve()
+                    }).catch(error => {
+                        reject(error)
+                    })
+                }
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            console.log(error);
+            reject(error)
+        })
+    })
+ }
  //get Product
 //  function getProduct(id) {
 //      return new Promise((resolve,reject)=>{
@@ -152,5 +235,6 @@ function checkCustomer(email,password) {
 module.exports = {
 
     registerCustomer,
-    checkCustomer
+    checkCustomer,
+    addProduct
 }

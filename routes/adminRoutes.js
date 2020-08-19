@@ -8,7 +8,7 @@ adminRouter.use((req, res ,next) => {
         }else {
             res.redirect('/login')
         }
-        
+        //
     } else {
         res.redirect('/login')
     }
@@ -19,34 +19,40 @@ adminRouter.get('/', (req, res) => {
         );
 })
 adminRouter.get('/addProducts', (req, res) => {
-    res.render('addProducts');
+    res.render('addProducts',{login:req.session.user});
 })
 adminRouter.post('/addProducts', (req, res) => {
-    if(req.files) {
-        const productTitle = req.body.productTitle
+    console.log(req.body);
+    console.log(req.files);
+    if (req.files) {
+        const productName = req.body.productName
         const productDescription = req.body.productDescription
-        if(productTitle && productDescription && Object.keys(req.files).length > 1) {
+        const productCategories = req.body.productCategories
+        const productColor = req.body.productColor
+        const productPrice = req.body.productPrice
+        const productSize = req.body.productSize
+        if (productName && productDescription && productCategories && productColor && productPrice && productSize && Object.keys(req.files).length > 1) {
             const imgs = []
-            for(const key in req.files) {
-                if(req.files[key].mimetype != '') {
-                    imgs.push(req.files[key])
+            for (const key in req.files) {
+                if (req.files[key].mimetype == 'image/jpeg') {
+                    imgs.push(req.files[key])  
+                } 
+            }                                        
+                    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, imgs, req.session.user._id).then(() => {
+                        res.json(1)
+                    }).catch(error => {
+                        if (error == 3) {
+                            res.json(3)
+                        }
+                    })
+                } else {
+                    res.json(2)
                 }
+            } else {
+                res.json(2)
             }
-            dataModule.addproducts(productTitle, productDescription, imgs).then(() => {
-                res.json(1)
-            }).catch(error => {
-                if(error == 3) {
-                    res.json(3)
-                }
-            })
-        } else {
-            res.json(2)
-        }
-    } else {
-        res.json(2)
-    }
 })
-
+//=============================================//
 adminRouter.get('/logout', (req, res) => {
     req.session.destroy()
     res.redirect('/login')
