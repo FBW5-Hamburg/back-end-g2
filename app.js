@@ -57,7 +57,12 @@ app.get('/contact',(req,res)=>{
 })
 //=======================shop ============================//
 app.get('/shop',(req,res)=>{
-    res.render('shop', {login: req.session.user})
+    dataModule.getAllProducts().then( products => {
+        res.render('shop', {login: req.session.user, products: products})
+    }).catch(error => {
+        res.send(error);
+    })
+
 })
 
 //==================== register===========================//
@@ -167,7 +172,8 @@ app.get('/logout',(req,res)=>{
 })
 // ================== show product page===============//
 app.get('/showproduct',(req,res)=>{
-    res.render('showproduct',{login:req.session.user})
+    
+    res.render('showproduct',{login:req.session.user, products: products})
 })
 //==================shopping_card page================//
 app.get('/shoppingcard',(req,res)=>{

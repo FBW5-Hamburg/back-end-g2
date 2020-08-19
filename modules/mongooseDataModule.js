@@ -244,7 +244,7 @@ function checkCustomer(email,password) {
  function getAllProducts() {
     return new Promise((resolve, reject) => {
         connect().then(() => {
-            products.find().then(products => {
+            Products.find().then(products => {
                 products.forEach(product => {
                     product['id'] = product['_id']
                 })
@@ -277,6 +277,21 @@ function userProducts(userid) {
     })
 }
 
+function getProduct (id) {
+    return new Promise((resolve, reject) => {
+        connect().then(() => {
+            Products.findOne({
+                _id: id
+            }).then(product => {
+                resolve(product)
+            }).catch(error => {
+                reject(error)
+            })
+        }).catch(error => {
+            reject(error)
+        })
+    })
+}
 
 
 module.exports = {
@@ -285,5 +300,6 @@ module.exports = {
     checkCustomer,
     addProduct,
     getAllProducts,
-    userProducts
+    userProducts,
+    getProduct
 }
