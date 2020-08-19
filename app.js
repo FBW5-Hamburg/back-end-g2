@@ -118,6 +118,16 @@ app.post('/login',(req,res)=>{
 
     
 })
+//  show product page
+app.get('/showproduct',(req,res)=>{
+    res.render('showproduct',{login:req.session.user})
+})
+//shopping_card page
+app.get('/shoppingcard',(req,res)=>{
+    res.render('shoppingcard',{login:req.session.user})
+})
+
+
 
 //========================end  Routs area=====================================//
 
