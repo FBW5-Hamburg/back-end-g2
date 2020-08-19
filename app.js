@@ -2,12 +2,20 @@
 const express = require('express')
 const session = require('express-session')
 
+
 const adminRouter = require('./routes/adminRoutes')
 const customerRoutes=require('./routes/customerRoutes')
+
+const fileupload = require('express-fileupload')
+const cookie = require('cookie-parser')
+const fs = require('fs')
+
+
+const adminRouter = require('./routes/adminRoutes')
+const dataModule = require('./modules/mongooseDataModule')
 const app = express()
 
-// include dataModule
-const dataModule = require('./modules/mongooseDataModule')
+
 
 
 app.use(express.static(__dirname + '/public'))
@@ -15,11 +23,27 @@ app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
+
 const sessionOptions = {
     secret: 'Fashi | Template',
     cookie: {}
 }
 app.use(session(sessionOptions))
+
+
+const sessionOptions = {
+    secret: 'bookStore',
+    cookie: {}
+}
+app.use(session(sessionOptions))
+app.use(cookie())
+app.use(fileupload({
+    limits: { fileSize: 50 * 1024 * 1024 }
+}))
+
+
+
+
 app.use('/admin', adminRouter)
 //app.use('/shopLogout',customerRoutes)
 
@@ -27,8 +51,17 @@ app.use('/admin', adminRouter)
 //======================== Routs area=====================================//
 // to add parameter to ejs to use it  in ejs files
 
+
 app.get('/', (req, res)=>{
 res.render('index',{login: req.session.user})
+
+//=================================0//
+app.get('/', (req, res) => {
+
+    res.render('index')
+
+});
+
 
 });
 
