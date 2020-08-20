@@ -26,6 +26,7 @@ const sessionOptions = {
     secret: 'Fashi | Template',
     cookie: {}
 }
+
 app.use(session(sessionOptions))
 app.use(cookie())
 app.use(fileupload({
@@ -46,6 +47,8 @@ app.use('/admin', adminRouter)
 app.get('/', (req, res)=>{
 res.render('index',{login: req.session.user})
 
+
+
 //=================================0//
 
 app.get('/admin', (req, res) => {
@@ -55,8 +58,9 @@ app.get('/admin', (req, res) => {
 
 
 
-});
 
+});
+//==========================//
 app.get('/contact',(req,res)=>{
     res.render('contact',{login: req.session.user})
 })
@@ -192,7 +196,24 @@ app.get('/shoppingcard',(req,res)=>{
     res.render('shoppingcard',{login:req.session.user})
 })
 
+//=========================Filter=========================//
+app.post("/filter", (req,res)=>{
+    const categories =req.body.categories;
+    const minPrice =req.body.minPrice;
+    const maxPrice =req.body.maxPrice;
+    const color = req.body.color;
+    const size = req.body.size;
+    const name =req.body.name
 
+
+    dataModule.filter(categories,minPrice,maxPrice,color,size,name).then(results=>{
+        res.render('shop',{login:req.session.user,products:results})
+    }).catch(error=>{ res.send('no result ')
+    console.log(error);
+})
+    console.log(req.body)
+    res.json(req.body)
+})
 
 
 //========================end  Routs area=====================================//

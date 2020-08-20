@@ -33,6 +33,8 @@ const customersSchema = new Schema({
     }
 })
 
+
+////////////////////////////////////////////////
 const productSchema = new Schema ({
     name: {
         type: String,
@@ -68,22 +70,10 @@ const productSchema = new Schema ({
     }
 
 })
-//
+
+
 const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
-
-//
-
-
-//creating users schema
-//  const adminSchema= new Schema({})
-// const admins = mongoose.model('users', adminSchema)
-// //creating Products schema
-// const productsSchema= new Schema({})
-//  const products = mongoose.model('users', productsSchema)
-
-
-
 
 //=====================  end Require Area===========================//
 //==================== function area========================//
@@ -162,17 +152,44 @@ function checkCustomer(email,password) {
     })
 
  }
- //get Product
-//  function getProduct(id) {
-//      return new Promise((resolve,reject)=>{
-// connect().then(()=>{
-//        products.findOne({_id=id}).then(product=>{
-//            resolve(product)
-//        }).catch(error=>{reject(error)})
-// }).catch((error)=>{reject(error)})
-//      })
-     
-//  }
+
+
+
+ //===================== filter function===========================//
+ function filter(categories,minPrice,maxPrice,color,size,name) {
+     return new Promise((resolve,reject)=>{
+         connect().then(()=>{
+             Products.find({
+                name:name,
+                categories:categories,
+                size:size,
+                color:color,
+             }).then(results=>{
+                 
+                 if(results){
+                     for (let i = 0; i < results.length; i++) {
+                         if (maxPrice>=results[i].price>=minPrice) {
+                             resolve(results)
+                             console.log(results);
+                         }else{
+                            reject('No result')
+                         }
+                         
+                     }
+                 }else{
+                    reject('No result')
+                 }
+             }).catch(error=>{
+                 reject(error)
+             })
+
+         }).catch(error=>{
+             reject(error)
+         })
+     })
+ }
+ //=====================================================//
+
  //delete Product 
 //  function deleteProduct(productId,userId) {
 //      return new Promise((resolve,reject)=>{
@@ -284,6 +301,7 @@ module.exports = {
     registerCustomer,
     checkCustomer,
     addProduct,
+    filter,
     getAllProducts,
     userProducts
 }

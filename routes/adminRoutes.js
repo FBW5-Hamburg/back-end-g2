@@ -8,22 +8,18 @@ adminRouter.use((req, res ,next) => {
     if (req.session.user) {
      if (req.session.user.role === 'admin'){
          next()
-        }else {
-            res.redirect('/login')
-        }        
-        next()
-    } else {
-        res.redirect('/login')
-    }
-})
+        }else {res.redirect('/login') }
+
+              
+    
 
 adminRouter.get('/', (req, res) => {
     res.render('admin',{login:req.session.user})
     console.log(req.session.user
         );
 })
-adminRouter.get('/addProducts', (req, res) => {
-    res.render('addProducts');
+adminRouter.get('/addproducts', (req, res) => {
+    res.render('addproducts',{login:req.session.user});
 })
 
 adminRouter.post('/addproducts', (req, res) => {
@@ -53,8 +49,8 @@ if (productName && productDescription && productCategories && productColor && pr
         if (req.files[key].mimetype == 'image/jpeg') {
             imgs.push(req.files[key])
         }
-    }
-    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, imgs, req.session.user._id).then(() => {
+
+    dataModule.addProduct(productName, productDescription, productCategories, productColor, productPrice, productSize, req.session.userid ).then(() => {
         res.json(1)
     }).catch(error => {
         if (error == 3) {
@@ -71,6 +67,9 @@ if (productName && productDescription && productCategories && productColor && pr
 
 
 })
+
+//=============================================//
+
 adminRouter.get('/myproducts', (req, res) => {
     dataModule.userProducts(req.session.user._id).then(products => {
         res.render('myproducts', {products})
