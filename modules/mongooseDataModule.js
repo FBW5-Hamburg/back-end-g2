@@ -62,7 +62,7 @@ const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
 
 //
-const Customers = mongoose.model('customers', customersSchema)
+// const Customers = mongoose.model('customers', customersSchema)
 
 //=====================  end Require Area===========================//
 //==================== function area========================//
