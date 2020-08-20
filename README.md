@@ -1,5 +1,6 @@
 # back-end-g2
-<h1>Fashion Syrian Shop</h1>
+# Fashion Syrian Shop
+<h3>Site Description</h3>
 <p>This Website is an example for real web store for trading a Fashion, buy & sell.</p>
 <p>It contains a products for sell, ordered by certan catiguries depanding on the product type</p>
 <p>For each product, there is a photos and details.</p>
@@ -12,3 +13,10 @@
 <li>Email address</li>
 <li>Passowrd</li>
 </ul>
+
+
+# Technical Description
+<h3>Platform</h3>
+<p>This website created in node.js, with express js and it use MongoDB database as backend.</p>
+<p>As frontend, it build in HTML5, CSS, Bootstrap and javascript</p>
+
