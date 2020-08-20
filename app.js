@@ -48,7 +48,7 @@ app.get('/', (req, res)=>{
 res.render('index',{login: req.session.user})
 
 
-
+});
 //=================================0//
 
 app.get('/admin', (req, res) => {
@@ -59,7 +59,7 @@ app.get('/admin', (req, res) => {
 
 
 
-});
+
 //==========================//
 app.get('/contact',(req,res)=>{
     res.render('contact',{login: req.session.user})
@@ -101,16 +101,6 @@ app.post('/register',(req,res)=>{
     }
 
 })
-
-//req.session.user = customer
-//if (customer.role === "Admin"){
-//     res.json(1)
-// } else {
-//     if (customer.role === "Customer") {
-//          res.json(5)
-//     }
-   
-// }
 
 //======================== login================================//
 //1=success or exist 

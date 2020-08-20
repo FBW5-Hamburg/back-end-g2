@@ -71,14 +71,9 @@ const productSchema = new Schema ({
 
 })
 
-<<<<<<< HEAD
-//
-// const Customers = mongoose.model('customers', customersSchema)
-=======
 
 const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
->>>>>>> 36db997e867e8ac3ec9104601290c7f03978d531
 
 //=====================  end Require Area===========================//
 //==================== function area========================//

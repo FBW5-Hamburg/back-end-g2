@@ -64,6 +64,9 @@ adminRouter.post('/addproducts', (req, res) => {
         } else {
             res.json(2)
         }
+    } else {
+        res.json(2)
+    }
 
 })
 
@@ -73,16 +76,6 @@ adminRouter.get('/myproducts', (req, res) => {
         res.render('myproducts', {
             products
         })
-    }).catch(error => {
-        res.send('404. page not found')
-    })
-})
-
-//=============================================//
-
-adminRouter.get('/myproducts', (req, res) => {
-    dataModule.userProducts(req.session.user._id).then(products => {
-        res.render('myproducts', {products})
     }).catch(error => {
         res.send('404. page not found')
     })
