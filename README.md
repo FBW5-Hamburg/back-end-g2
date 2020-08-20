@@ -24,15 +24,15 @@
 <p>1- <a href=""><strong>Wael</strong></a>:<br/>
 
 </p>
-<p>2- <a href=""><strong>Wael</strong></a>:<br/>
+<p>2- <a href=""><strong>Bashar</strong></a>:<br/>
 
 </p>
-<p>3- <a href=""><strong>Wael</strong></a>:<br/>
+<p>3- <a href=""><strong>Abdulrahman</strong></a>:<br/>
 
 </p>
 
 # How to use:
 <p>First: clone the repository.</p>
 <p>Second: you should have a mongodb database cluster, you should get the connection string and save it in <a href="https://github.com/FBW5-Hamburg/back-end-g2/blob/Wael-Branch/package.json"><strong>configuration.json</strong></a>.</p>
-<p>Third: instann npm bu run this command in the terminal inside the repository folder: <code>npm install</code></p>
+<p>Third: install npm by run this command in the terminal inside the repository folder: <code>npm install</code></p>
 <p>Last: Run this command to start the application: <code>npm start</code></p>
