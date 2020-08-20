@@ -163,7 +163,24 @@ app.get('/shoppingcard',(req,res)=>{
     res.render('shoppingcard',{login:req.session.user})
 })
 
+//=========================Filter=========================//
+app.post("/filter", (req,res)=>{
+    const categories =req.body.categories;
+    const minPrice =req.body.minPrice;
+    const maxPrice =req.body.maxPrice;
+    const color = req.body.color;
+    const size = req.body.size;
+    const name =req.body.name
 
+
+    dataModule.filter(categories,minPrice,maxPrice,color,size,name).then(results=>{
+        res.render('shop',{login:req.session.user,products:results})
+    }).catch(error=>{ res.send('no result ')
+    console.log(error);
+})
+    console.log(req.body)
+    res.json(req.body)
+})
 
 //========================end  Routs area=====================================//
 

@@ -195,6 +195,41 @@ function checkCustomer(email,password) {
     })
  }
 
+ //===================== filter function===========================//
+ function filter(categories,minPrice,maxPrice,color,size,name) {
+     return new Promise((resolve,reject)=>{
+         connect().then(()=>{
+             Products.find({
+                name:name,
+                categories:categories,
+                size:size,
+                color:color,
+             }).then(results=>{
+                 
+                 if(results){
+                     for (let i = 0; i < results.length; i++) {
+                         if (maxPrice>=results[i].price>=minPrice) {
+                             resolve(results)
+                             console.log(results);
+                         }else{
+                            reject('No result')
+                         }
+                         
+                     }
+                 }else{
+                    reject('No result')
+                 }
+             }).catch(error=>{
+                 reject(error)
+             })
+
+         }).catch(error=>{
+             reject(error)
+         })
+     })
+ }
+ //=====================================================//
+
  //delete Product 
 //  function deleteProduct(productId,userId) {
 //      return new Promise((resolve,reject)=>{
@@ -220,5 +255,6 @@ module.exports = {
 
     registerCustomer,
     checkCustomer,
-    addProduct
+    addProduct,
+    filter
 }
