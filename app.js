@@ -46,6 +46,19 @@ app.use('/admin', adminRouter)
 
 app.get('/', (req, res)=>{
 res.render('index',{login: req.session.user})
+
+
+
+//=================================0//
+
+app.get('/admin', (req, res) => {
+    res.render('admin')
+});
+
+
+
+
+
 });
 //==========================//
 app.get('/contact',(req,res)=>{
@@ -127,6 +140,17 @@ app.post('/login',(req,res)=>{
 
     if(logInEmail&& logInPassword){
         dataModule.checkCustomer(logInEmail, logInPassword).then((customer)=>{
+
+            req.session.user = customer
+            if (customer.role === "Admin"){
+                res.json(1)
+            } else {
+                if (customer.role === "Customer") {
+                     res.json(5)
+                }
+               
+            }
+
           
             req.session.user = customer
              if(customer.role==="admin"){
@@ -135,6 +159,7 @@ app.post('/login',(req,res)=>{
                  
              
            
+
 })
        .catch((error)=>{
            if (error==3) {
@@ -149,6 +174,14 @@ app.post('/login',(req,res)=>{
 
     
 })
+
+// app.get('/myproducts', (req, res) => {
+//     dataModule.getAllBooks().then(products => {
+//         res.render('myproducts', {products: products})
+//     })
+    
+// });
+
 //=================== logout====================//
 app.get('/logout',(req,res)=>{
     req.session.destroy()
@@ -181,6 +214,7 @@ app.post("/filter", (req,res)=>{
     console.log(req.body)
     res.json(req.body)
 })
+
 
 //========================end  Routs area=====================================//
 
