@@ -10,8 +10,6 @@ const fileupload = require('express-fileupload')
 const cookie = require('cookie-parser')
 const fs = require('fs')
 
-
-const adminRouter = require('./routes/adminRoutes')
 const dataModule = require('./modules/mongooseDataModule')
 const app = express()
 
@@ -28,13 +26,7 @@ const sessionOptions = {
     secret: 'Fashi | Template',
     cookie: {}
 }
-app.use(session(sessionOptions))
 
-
-const sessionOptions = {
-    secret: 'bookStore',
-    cookie: {}
-}
 app.use(session(sessionOptions))
 app.use(cookie())
 app.use(fileupload({
@@ -54,17 +46,8 @@ app.use('/admin', adminRouter)
 
 app.get('/', (req, res)=>{
 res.render('index',{login: req.session.user})
-
-//=================================0//
-app.get('/', (req, res) => {
-
-    res.render('index')
-
 });
-
-
-});
-
+//==========================//
 app.get('/contact',(req,res)=>{
     res.render('contact',{login: req.session.user})
 })
