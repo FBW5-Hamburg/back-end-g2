@@ -1,12 +1,15 @@
 //================== Require area===============================//
 const express = require('express')
 const session = require('express-session')
+
+
+const adminRouter = require('./routes/adminRoutes')
+const customerRoutes=require('./routes/customerRoutes')
+
 const fileupload = require('express-fileupload')
 const cookie = require('cookie-parser')
 const fs = require('fs')
 
-
-const adminRouter = require('./routes/adminRoutes')
 const dataModule = require('./modules/mongooseDataModule')
 const app = express()
 
@@ -20,9 +23,10 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
 const sessionOptions = {
-    secret: 'bookStore',
+    secret: 'Fashi | Template',
     cookie: {}
 }
+
 app.use(session(sessionOptions))
 app.use(cookie())
 app.use(fileupload({
@@ -31,47 +35,58 @@ app.use(fileupload({
 
 
 
+
 app.use('/admin', adminRouter)
+//app.use('/shopLogout',customerRoutes)
+
 //======================== end Require area====================================//
 //======================== Routs area=====================================//
+// to add parameter to ejs to use it  in ejs files
+
+
+app.get('/', (req, res)=>{
+res.render('index',{login: req.session.user})
+
+
 
 //=================================0//
-app.get('/', (req, res) => {
-
-    res.render('index')
-
-});
 
 app.get('/admin', (req, res) => {
     res.render('admin')
 });
-app.get('/addproducts', (req, res) => {
-    res.render('addproducts')
+
+
+
+
+
 });
-
-
+//==========================//
 app.get('/contact',(req,res)=>{
-    res.render('contact')
+    res.render('contact',{login: req.session.user})
 })
 //=======================shop ============================//
 app.get('/shop',(req,res)=>{
-    res.render('shop')
+ 
+    res.render('shop', {login: req.session.user})
 })
-//=====================shop_cart===========================//
-app.get('/shopCart',(req,res)=>{
-    res.render('shopCart')
-})
+
 //==================== register===========================//
 app.get('/register',(req,res)=>{
-    res.render('register')
+if (req.session.user){
+    res.redirect('/')
+} else {
+    res.render('register', {login: req.session.user})
+}
 })
 app.post('/register',(req,res)=>{
+    
     // console.log(req.body);
+    const name=req.body.name.trim();
     const email=req.body.email.trim();
     const password =req.body.password;
     const rePassword= req.body.password;
-    if(email&&password&&password==rePassword){
-        dataModule.registerCustomer(email,password).then(()=>{
+    if(name&&email&&password&&password==rePassword){
+        dataModule.registerCustomer(name,email,password).then(()=>{
             res.json(1)
         }).catch((error)=>{
             console.log(error);
@@ -86,14 +101,38 @@ app.post('/register',(req,res)=>{
     }
 
 })
+
+//req.session.user = customer
+//if (customer.role === "Admin"){
+//     res.json(1)
+// } else {
+//     if (customer.role === "Customer") {
+//          res.json(5)
+//     }
+   
+// }
+
 //======================== login================================//
 //1=success or exist 
 //2= missing entry
 //3=not exist
 //4=server problem
 app.get('/login',(req,res)=>{
-    res.render('login')
+// console.log(req.session);
+     if (req.session.user){
+         res.redirect('/')
+     } else {
+          res.render('login', {login: req.session.user})
+     }
+  
 })
+//=============================================//
+// app.get('/category/:cat', (req, res) => {
+//     const category = req.params.cat
+//     res.send(category)
+// })
+//=================================================//
+
 app.post('/login',(req,res)=>{
     // console.log(req.body);
     const logInEmail= req.body.email.trim();
@@ -101,7 +140,26 @@ app.post('/login',(req,res)=>{
 
     if(logInEmail&& logInPassword){
         dataModule.checkCustomer(logInEmail, logInPassword).then((customer)=>{
-           res.json(1)
+
+            req.session.user = customer
+            if (customer.role === "Admin"){
+                res.json(1)
+            } else {
+                if (customer.role === "Customer") {
+                     res.json(5)
+                }
+               
+            }
+
+          
+            req.session.user = customer
+             if(customer.role==="admin"){
+                 res.json(5)
+             }else if(customer.role==="customer"){res.json(1)}
+                 
+             
+           
+
 })
        .catch((error)=>{
            if (error==3) {
@@ -116,6 +174,47 @@ app.post('/login',(req,res)=>{
 
     
 })
+
+// app.get('/myproducts', (req, res) => {
+//     dataModule.getAllBooks().then(products => {
+//         res.render('myproducts', {products: products})
+//     })
+    
+// });
+
+//=================== logout====================//
+app.get('/logout',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/login')
+})
+// ================== show product page===============//
+app.get('/showproduct',(req,res)=>{
+    res.render('showproduct',{login:req.session.user})
+})
+//==================shopping_card page================//
+app.get('/shoppingcard',(req,res)=>{
+    res.render('shoppingcard',{login:req.session.user})
+})
+
+//=========================Filter=========================//
+app.post("/filter", (req,res)=>{
+    const categories =req.body.categories;
+    const minPrice =req.body.minPrice;
+    const maxPrice =req.body.maxPrice;
+    const color = req.body.color;
+    const size = req.body.size;
+    const name =req.body.name
+
+
+    dataModule.filter(categories,minPrice,maxPrice,color,size,name).then(results=>{
+        res.render('shop',{login:req.session.user,products:results})
+    }).catch(error=>{ res.send('no result ')
+    console.log(error);
+})
+    console.log(req.body)
+    res.json(req.body)
+})
+
 
 //========================end  Routs area=====================================//
 
