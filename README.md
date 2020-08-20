@@ -17,6 +17,6 @@
 
 # Technical Description
 <h3>Platform</h3>
-<p>This website created in node.js, with express js and it use MongoDB database as backend.</p>
-<p>As frontend, it build in HTML5, CSS, Bootstrap and javascript</p>
+<p>This website created in <a href="https://nodejs.org/en/"><strong>node.js</strong></a>, with <a href="https://expressjs.com/de/"><strong>express js</strong></a> and it uses <a href="https://www.mongodb.com/"><strong>MongoDB</strong></a> database as backend.</p>
+<p>As frontend, it build in HTML5, CSS, <a href="https://getbootstrap.com/docs/4.4/getting-started/introduction/"><strong>Bootstrap</strong></a> and javascript</p>
 
