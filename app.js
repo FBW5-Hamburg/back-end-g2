@@ -145,12 +145,6 @@ app.post('/login',(req,res)=>{
     
 })
 
-// app.get('/myproducts', (req, res) => {
-//     dataModule.getAllBooks().then(products => {
-//         res.render('myproducts', {products: products})
-//     })
-    
-// });
 
 //=================== logout====================//
 app.get('/logout',(req,res)=>{
@@ -197,6 +191,7 @@ app.post("/searchResult", (req,res)=>{
     console.log(req.body)
     //res.json(req.body)
 })
+
 
 
 //========================end  Routs area=====================================//

@@ -76,10 +76,12 @@ adminRouter.get('/myproducts', (req, res) => {
         })
     }).catch(error => {
         res.send('404. page not found')
+        console.log(error);
     })
 })
 //===========================================//
 adminRouter.post('/deleteproduct', (req, res) => {
+    console.log(req.body.productid);
     const productid = req.body.productid
     dataModule.deleteProduct(productid, req.session.user._id).then(() => {
         res.json(1)

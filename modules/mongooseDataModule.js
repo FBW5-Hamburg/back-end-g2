@@ -260,7 +260,7 @@ function checkCustomer(email,password) {
 function userProducts(userid) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
-            products.find({
+            Products.find({
                 userid: userid
             }).then(products => {
                 products.forEach(product => {
@@ -279,11 +279,9 @@ function userProducts(userid) {
 function getProduct (id) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
-            Products.findOne({
-                _id: id
-            }).then(product => {
+            Products.findOne({_id: id}).then(product => {
                 if(product){
-                    product.id == product._id
+                    product.id = product._id
                     resolve(product)
                 } else {
                     reject(new Error ('can not find product with this id'))
