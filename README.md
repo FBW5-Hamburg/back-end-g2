@@ -15,10 +15,13 @@
 </ul>
 
 
+
+
 # Technical Description
 <h3>Platform</h3>
 <p>This website created in <a href="https://nodejs.org/en/"><strong>node.js</strong></a>, with <a href="https://expressjs.com/de/"><strong>express js</strong></a> and it uses <a href="https://www.mongodb.com/"><strong>MongoDB</strong></a> database as backend.</p>
 <p>As frontend, it build in HTML5, CSS, <a href="https://getbootstrap.com/docs/4.4/getting-started/introduction/"><strong>Bootstrap</strong></a> and javascript</p>
+
 
 # Team Description
 <p>1- <a href=""><strong>Wael</strong></a>:<br/>
@@ -31,8 +34,20 @@
 
 </p>
 
+
+# Team Description
+<p>1- <a href=""><strong>Wael</strong></a>:<br/>
+</p>
+<p>2- <a href=""><strong>Bashar</strong></a>:<br/>
+</p>
+<p>3- <a href=""><strong>Abdulrahman</strong></a>:<br/>
+</p>
+
 # How to use:
 <p>First: clone the repository.</p>
 <p>Second: you should have a mongodb database cluster, you should get the connection string and save it in <a href="https://github.com/FBW5-Hamburg/back-end-g2/blob/Wael-Branch/package.json"><strong>configuration.json</strong></a>.</p>
 <p>Third: install npm by run this command in the terminal inside the repository folder: <code>npm install</code></p>
+
 <p>Last: Run this command to start the application: <code>npm start</code></p>
+
+
