@@ -255,50 +255,11 @@
             console.log($("#formData").serialize())
             // const fd= new FormData();
             $.ajax({
-                url: "/searchResult",
+                url: "/filter",
                 method: "POST",
                 data: formData,
                 success: response=>{
                     console.log(response)
-                   
-                    if(response !== '2') {
-                        const productsContainer = document.querySelector('.product-list > .row')
-                        productsContainer.innerText = ''
-                        const products = response
-                        for (let i = 0; i < products.length; i++) {
-                            
-                        
-                        let productHtml = `<div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="${ products[i].imgs[0] } " alt="img">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ quick-view</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">${ products[i].name.trim() } </div>
-                                        <a href="#">
-                                            <h5>${ products[i].color } </h5>
-                                        </a>
-                                        <div class="product-price">
-                                            €14,00 
-                                            <span>€${ products[i].price } </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`
-                            productsContainer.innerHTML += productHtml
-                        }
-                        
-                    } else {
-                        productsContainer.innerText = 'no Results'
-                    }
                 },
                 error: error=>{
                     console.log(error)

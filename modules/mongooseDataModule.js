@@ -7,7 +7,7 @@ const fs = require('fs')
 const mongoose = require('mongoose')
 // getting connection string from data base
 
-const connectionString = 'mongodb+srv://FBW-5:yZiPlwogw25pajKs@cluster0.26nmv.mongodb.net/test2?retryWrites=true&w=majority'
+const connectionString ='mongodb+srv://user1:I3rexyBBbauuuUeT@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
 
 const Schema = mongoose.Schema
 
@@ -164,18 +164,21 @@ function checkCustomer(email,password) {
                 categories:categories,
                 size:size,
                 color:color,
+                price: { $gt: minPrice, $lt: maxPrice }
              }).then(results=>{
-                 
-                 if(results){
-                     for (let i = 0; i < results.length; i++) {
-                         if (maxPrice>=results[i].price>=minPrice) {
-                             resolve(results)
-                             console.log(results);
-                         }else{
-                            reject('No result')
-                         }
+                   console.log(results);
+                 if(results.length){
+                     
+                    //  for (let i = 0; i < results.length; i++) {
+                    //      if (maxPrice>=results[i].price>=minPrice) {
+                    //          resolve(results)
+                           
+                    //      }else{
+                    //         reject('No result')
+                    //      }
                          
-                     }
+                    //  }
+                    resolve(results)
                  }else{
                     reject('No result')
                  }
@@ -189,27 +192,6 @@ function checkCustomer(email,password) {
      })
  }
  //=====================================================//
-
- //delete Product 
-//  function deleteProduct(productId,userId) {
-//      return new Promise((resolve,reject)=>{
-//         getProduct(productId).then(product=>{
-//             //delete imgs from publics folder
-//             if (product.userid==userId) {
-//                 product.imgs.forEach(img => {
-//                     if(fs.existsSync('./public'+ img)){
-//                         fs.unlinkSync('./public'+img)
-//                     }
-//                 });  
-                //deleting the product from Database( products) the database name 
-                // products.deleteOne()
-
-//             }
-//         })
-//      })
-//  }
-
-
 
 
  function addProduct (productName, productDescription, categories, color, prise, size, productImgs, userid){
@@ -309,6 +291,26 @@ function getProduct (id) {
         })
     })
 }
+//========================================================//
+ delete Product 
+ function deleteProduct(productId,userId) {
+     return new Promise((resolve,reject)=>{
+        getProduct(productId).then(product=>{
+            //delete imgs from publics folder
+            if (product.userid==userId) {
+                product.imgs.forEach(img => {
+                    if(fs.existsSync('./public'+ img)){
+                        fs.unlinkSync('./public'+img)
+                    }
+                });  
+                // deleting the product from Database( products) the database name 
+                Products.deleteOne()
+
+            }
+        })
+     })
+ }
+
 
 module.exports = {
 
@@ -318,5 +320,6 @@ module.exports = {
     filter,
     getAllProducts,
     userProducts,
-    getProduct
+    getProduct,
+    deleteProduct
 }

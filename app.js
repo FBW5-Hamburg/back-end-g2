@@ -178,20 +178,22 @@ app.get('/shop',(req,res)=>{
 })
 
 //=========================Filter=========================//
-app.post("/filter", (req,res)=>{
+
+app.post("/searchResult", (req,res)=>{
     const categories =req.body.categories;
     const minPrice =req.body.minPrice;
     const maxPrice =req.body.maxPrice;
     const color = req.body.color;
     const size = req.body.size;
     const name =req.body.name
-    dataModule.filter(categories,minPrice,maxPrice,color,size,name).then(results=>{
-        res.render('shop',{login:req.session.user,products:results})
-    }).catch(error=>{ res.send('no result ')
+    dataModule.filter(categories,parseInt(minPrice.replace('$', '')) ,parseInt(maxPrice.replace('$', '')) ,color,size,name).then(results=>{
+        //res.render('shop',{login:req.session.user,products:results})
+        res.json(results)
+    }).catch(error=>{ res.json(2)
     console.log(error);
 })
     console.log(req.body)
-    res.json(req.body)
+    //res.json(req.body)
 })
 
 

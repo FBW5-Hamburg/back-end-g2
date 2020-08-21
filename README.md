@@ -1,56 +1,31 @@
-back-end-g2 project documentation
-
-project Name : 
-
-Prepared By: Bashar Salman / Abd Akrahman Ebrahem/Wael 
-
-Table of contents
-
-1-Introduction :
-
-    1.1   purpose of the Project
-
-    1.2   An explanation of how to use the web-Shop
-2-overall description:
-
-   2.1 Work plan
-
-   2.2 Time table
-
-   2.3 Distribution of tasks
-3-The used programming languages
-
-*Introduction
-
-1.1 purpose :
-
-    
-
-    
-1.2 How to use the web-Shop :
-
-         the customer can 
-*overall description
-
-2.1 Work plan
-
-    a.    The player ship
-
-    b.    Laser shoot
-
-    c.    Enemy ships
-
-    d.    Destroying enemy ships
-
-    e.     Background
-
-    f.    Stat Button
-
-    g.     Score
-
-    h.     Bug fixing  
-2.2 Time table: At least tow tasks were supposed to be completed daily . but because of technical proplem with Abdolrahman , we were unable to stick to the Time table
-
-3-The used programming languages: 3.1 Javascript 3.2 css 3.3 HTML5
-
-Code Snippet: 1.we relied on Function to write this code 2.canvas 3.Layers 4.Es6 Mehtod
+# back-end-g2
+# Fashion Syrian Shop
+<h3>Site Description</h3>
+<p>This Website is an example for real web store for trading a Fashion, buy & sell.</p>
+<p>It contains a products for sell, ordered by certan catiguries depanding on the product type</p>
+<p>For each product, there is a photos and details.</p>
+<p>The site admin can manage the products, adding, editing, updating and delete</p>
+<p>The Customer can reviwe the products, select some, and buy</p>
+<p>Each customer have an account, he must register in the website before buying</p>
+<p>The information for registration are:</p>
+<ul>
+<li>Full Name</li>
+<li>Email address</li>
+<li>Passowrd</li>
+</ul>
+# Technical Description
+<h3>Platform</h3>
+<p>This website created in <a href="https://nodejs.org/en/"><strong>node.js</strong></a>, with <a href="https://expressjs.com/de/"><strong>express js</strong></a> and it uses <a href="https://www.mongodb.com/"><strong>MongoDB</strong></a> database as backend.</p>
+<p>As frontend, it build in HTML5, CSS, <a href="https://getbootstrap.com/docs/4.4/getting-started/introduction/"><strong>Bootstrap</strong></a> and javascript</p>
+# Team Description
+<p>1- <a href=""><strong>Wael</strong></a>:<br/>
+</p>
+<p>2- <a href=""><strong>Bashar</strong></a>:<br/>
+</p>
+<p>3- <a href=""><strong>Abdulrahman</strong></a>:<br/>
+</p>
+# How to use:
+<p>First: clone the repository.</p>
+<p>Second: you should have a mongodb database cluster, you should get the connection string and save it in <a href="https://github.com/FBW5-Hamburg/back-end-g2/blob/Wael-Branch/package.json"><strong>configuration.json</strong></a>.</p>
+<p>Third: install npm by run this command in the terminal inside the repository folder: <code>npm install</code></p>
+<p>Last: Run this command to start the application: <code>npm start</code></p>
