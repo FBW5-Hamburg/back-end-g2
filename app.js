@@ -2,7 +2,6 @@
 const express = require('express')
 const session = require('express-session')
 
-
 const adminRouter = require('./routes/adminRoutes')
 const customerRoutes=require('./routes/customerRoutes')
 
@@ -31,26 +30,16 @@ app.use(fileupload({
     limits: { fileSize: 50 * 1024 * 1024 }
 }))
 
-
-
-
 app.use('/admin', adminRouter)
 //app.use('/shopLogout',customerRoutes)
 
-//======================== end Require area====================================//
 //======================== Routs area=====================================//
 // to add parameter to ejs to use it  in ejs files
-
 
 app.get('/', (req, res)=>{
     res.render('index',{login: req.session.user})
 })
 //=================================0//
-
-// app.get('/admin', (req, res) => {
-//     res.render('admin')
-// });
-
 
 app.get('/contact',(req,res)=>{
     res.render('contact',{login: req.session.user})
@@ -62,20 +51,16 @@ app.get('/shop',(req,res)=>{
     }).catch(error => {
         res.send(error);
     })
-
 })
-
 //==================== register===========================//
 app.get('/register',(req,res)=>{
-if (req.session.user){
-    res.redirect('/')
-} else {
-    res.render('register', {login: req.session.user})
-}
+    if (req.session.user){
+        res.redirect('/')
+    } else {
+        res.render('register', {login: req.session.user})
+    }
 })
 app.post('/register',(req,res)=>{
-    
-    // console.log(req.body);
     const name=req.body.name.trim();
     const email=req.body.email.trim();
     const password =req.body.password;
@@ -96,17 +81,6 @@ app.post('/register',(req,res)=>{
     }
 
 })
-
-//req.session.user = customer
-//if (customer.role === "Admin"){
-//     res.json(1)
-// } else {
-//     if (customer.role === "Customer") {
-//          res.json(5)
-//     }
-   
-// }
-
 //======================== login================================//
 //1=success or exist 
 //2= missing entry
@@ -141,30 +115,19 @@ app.post('/login',(req,res)=>{
             } else {
                 if (customer.role === "customer") {
                      res.json(1)
-                }
-               
+                } 
             }
-}).catch((error)=>{
+        }).catch((error)=>{
            if (error==3) {
                res.json(3)
            }else{
             res.json(4)
            }
-       })
-   }else{
-    res.json(2)
-   }
-
-    
+        })
+    }else{
+        res.json(2)
+    }  
 })
-
-// app.get('/myproducts', (req, res) => {
-//     dataModule.getAllBooks().then(products => {
-//         res.render('myproducts', {products: products})
-//     })
-    
-// });
-
 // ================== show product page===============//
 app.get('/showproduct/:id',(req,res)=>{
     dataModule.getProduct(req.params.id).then(product =>{
@@ -183,11 +146,6 @@ app.get('/logout',(req,res)=>{
     req.session.destroy()
     res.redirect('/login')
 })
-
-
-
-
-
 //========================end  Routs area=====================================//
 
 app.listen(port, () => {

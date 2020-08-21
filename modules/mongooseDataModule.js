@@ -1,17 +1,19 @@
 //===================== Require Area===========================//
 //password hash
 const passwordHash = require('password-hash')
+
 //file system 
 const fs = require('fs')
+
 // require Mongoose
 const mongoose = require('mongoose')
-// getting connection string from data base
 
+// getting connection string from data base
 const connectionString = 'mongodb+srv://FBW-5:yZiPlwogw25pajKs@cluster0.26nmv.mongodb.net/test2?retryWrites=true&w=majority'
 
 const Schema = mongoose.Schema
 
-//  creating Schema
+//=============== creating Schema==============//
 const customersSchema = new Schema({
     name:{
         type: String,
@@ -69,7 +71,7 @@ const productSchema = new Schema ({
     }
 
 })
-//
+
 const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
 
@@ -150,7 +152,6 @@ function checkCustomer(email,password) {
     })
 
  }
-
 //================  delete Product =====================//
 
 function deleteProduct(productid, userid) {
@@ -182,10 +183,7 @@ function deleteProduct(productid, userid) {
         })
     })
   }
-
-
-
-
+//================== Add Product==========================//
  function addProduct (productName, productDescription, categories, color, prise, size, productImgs, userid){
     return new Promise ((resolve, reject) => {
         connect().then(() => {
@@ -231,7 +229,7 @@ function deleteProduct(productid, userid) {
         })
     })
  }
-
+//================== Get All Product==========================//
  function getAllProducts() {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -248,7 +246,7 @@ function deleteProduct(productid, userid) {
         })
     })
 }
-
+//================== User Products==========================//
 function userProducts(userid) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -267,7 +265,7 @@ function userProducts(userid) {
         })
     })
 }
-
+//================== Get Product==========================//
 function getProduct (id) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
@@ -275,7 +273,7 @@ function getProduct (id) {
                 _id: id
             }).then(product => {
                 if(product){
-                    product.id == product._id
+                    product.id = product._id
                     resolve(product)
                 } else {
                     reject(new Error ('can not find product with this id'))

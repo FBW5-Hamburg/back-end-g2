@@ -14,34 +14,31 @@ adminRouter.use((req, res, next) => {
         res.redirect('/login')
     }
 })
-
+//====================================================//
 adminRouter.get('/', (req, res) => {
     res.render('admin', {
         login: req.session.user
     })
     console.log(req.session.user);
 })
+//====================================================//
 adminRouter.get('/addproducts', (req, res) => {
     res.render('addproducts', {
         login: req.session.user
     });
 })
-
+//======================== rout add Product============================//
 adminRouter.post('/addproducts', (req, res) => {
     //console.log(req.body);
     //console.log(req.files);
-
     //console.log(Object.keys(req.files));
     if (req.files) {
-
-
         const productName = req.body.productName
         const productDescription = req.body.productDescription
         const productCategories = req.body.productCategories
         const productColor = req.body.productColor
         const productPrice = req.body.productPrice
         const productSize = req.body.productSize
-
 
         if (productName && productDescription && productCategories && productColor && productPrice && productSize && Object.keys(req.files).length > 1) {
             const imgs = []
@@ -64,10 +61,9 @@ adminRouter.post('/addproducts', (req, res) => {
     } else {
         res.json(2)
     }
-
 })
 
-//==============================================================//
+//========================rout show product==============================//
 adminRouter.get('/myproducts', (req, res) => {
     dataModule.userProducts(req.session.user._id).then(products => {
         res.render('myproducts', {
@@ -78,6 +74,7 @@ adminRouter.get('/myproducts', (req, res) => {
         res.send('404. page not found')
     })
 })
+//======================== rout delete Product============================//
 adminRouter.post('/deleteproduct', (req, res) => {
     const productid = req.body.productid
     dataModule.deleteProduct(productid, req.session.user._id).then(() => {
@@ -91,7 +88,7 @@ adminRouter.get('/logout', (req, res) => {
     req.session.destroy()
     res.redirect('/login')
 });
-//======================== delete Product============================//
+
 
 
 module.exports = adminRouter
