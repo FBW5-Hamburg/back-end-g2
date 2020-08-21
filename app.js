@@ -47,9 +47,9 @@ app.get('/', (req, res)=>{
 })
 //=================================0//
 
-app.get('/admin', (req, res) => {
-    res.render('admin')
-});
+// app.get('/admin', (req, res) => {
+//     res.render('admin')
+// });
 
 
 app.get('/contact',(req,res)=>{
@@ -165,20 +165,25 @@ app.post('/login',(req,res)=>{
     
 // });
 
-//=================== logout====================//
-app.get('/logout',(req,res)=>{
-    req.session.destroy()
-    res.redirect('/login')
-})
 // ================== show product page===============//
-app.get('/showproduct',(req,res)=>{
+app.get('/showproduct/:id',(req,res)=>{
+    dataModule.getProduct(req.params.id).then(product =>{
+        res.render('showproduct',{login:req.session.user, products: product})
+    }).catch(error => {
+        res.send(error);
+    })
     
-    res.render('showproduct',{login:req.session.user, products: products})
 })
 //==================shopping_card page================//
 app.get('/shoppingcard',(req,res)=>{
     res.render('shoppingcard',{login:req.session.user})
 })
+//=================== logout====================//
+app.get('/logout',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/login')
+})
+
 
 
 

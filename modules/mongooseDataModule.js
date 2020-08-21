@@ -295,7 +295,6 @@ function getProduct (id) {
 
 
 module.exports = {
-
     registerCustomer,
     checkCustomer,
     addProduct,
