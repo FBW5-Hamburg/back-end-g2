@@ -30,10 +30,7 @@ adminRouter.get('/addproducts', (req, res) => {
 adminRouter.post('/addproducts', (req, res) => {
     //console.log(req.body);
     //console.log(req.files);
-    // responses map
-    // 1 book saved successfuly
-    // 2 data error
-    //console.log(req.body);
+
     //console.log(Object.keys(req.files));
     if (req.files) {
 
@@ -74,10 +71,19 @@ adminRouter.post('/addproducts', (req, res) => {
 adminRouter.get('/myproducts', (req, res) => {
     dataModule.userProducts(req.session.user._id).then(products => {
         res.render('myproducts', {
-            products
+            login: req.session.user,
+            products: products
         })
     }).catch(error => {
         res.send('404. page not found')
+    })
+})
+adminRouter.post('/deleteproduct', (req, res) => {
+    const productid = req.body.productid
+    dataModule.deleteProduct(productid, req.session.user._id).then(() => {
+        res.json(1)
+    }).catch(error => {
+        res.json(2)
     })
 })
 

@@ -73,20 +73,8 @@ const productSchema = new Schema ({
 const Customers = mongoose.model('customers', customersSchema)
 const Products = mongoose.model('products', productSchema)
 
-//
-
-
-//creating users schema
-//  const adminSchema= new Schema({})
-// const admins = mongoose.model('users', adminSchema)
-// //creating Products schema
-// const productsSchema= new Schema({})
-//  const products = mongoose.model('users', productsSchema)
-
-
-
-
 //=====================  end Require Area===========================//
+
 //==================== function area========================//
 function connect() {
     return new Promise((resolve, reject) => {
@@ -162,35 +150,38 @@ function checkCustomer(email,password) {
     })
 
  }
- //get Product
-//  function getProduct(id) {
-//      return new Promise((resolve,reject)=>{
-// connect().then(()=>{
-//        products.findOne({_id=id}).then(product=>{
-//            resolve(product)
-//        }).catch(error=>{reject(error)})
-// }).catch((error)=>{reject(error)})
-//      })
-     
-//  }
- //delete Product 
-//  function deleteProduct(productId,userId) {
-//      return new Promise((resolve,reject)=>{
-//         getProduct(productId).then(product=>{
-//             //delete imgs from publics folder
-//             if (product.userid==userId) {
-//                 product.imgs.forEach(img => {
-//                     if(fs.existsSync('./public'+ img)){
-//                         fs.unlinkSync('./public'+img)
-//                     }
-//                 });  
-                //deleting the product from Database( products) the database name 
-                // products.deleteOne()
 
-//             }
-//         })
-//      })
-//  }
+//================  delete Product =====================//
+
+function deleteProduct(productid, userid) {
+    return new Promise((resolve, reject) => {
+        getProduct(productid).then(product => {
+            console.log(product);
+
+            if (product.userid === userid) {
+
+                product.imgs.forEach(img => {
+
+                    if (fs.existsSync('./public' + img)){
+                        fs.unlinkSync('./public' + img)
+                    }
+                })
+                    Products.deleteOne({_id: productid}).then(() => {
+
+                        resolve()
+                    }).catch(error => {
+
+                        reject(error)
+                    })
+
+            } else {
+                reject(new Error('the user is not correct'))
+            }
+        }).catch(error => {
+            reject(error)
+        })
+    })
+  }
 
 
 
@@ -261,7 +252,7 @@ function checkCustomer(email,password) {
 function userProducts(userid) {
     return new Promise((resolve, reject) => {
         connect().then(() => {
-            products.find({
+            Products.find({
                 userid: userid
             }).then(products => {
                 products.forEach(product => {
@@ -283,7 +274,13 @@ function getProduct (id) {
             Products.findOne({
                 _id: id
             }).then(product => {
-                resolve(product)
+                if(product){
+                    product.id == product._id
+                    resolve(product)
+                } else {
+                    reject(new Error ('can not find product with this id'))
+                }
+                
             }).catch(error => {
                 reject(error)
             })
@@ -300,5 +297,6 @@ module.exports = {
     addProduct,
     getAllProducts,
     userProducts,
-    getProduct
+    getProduct,
+    deleteProduct
 }
