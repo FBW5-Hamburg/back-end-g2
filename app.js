@@ -158,10 +158,12 @@ app.get('/logout',(req,res)=>{
     res.redirect('/login')
 })
 // ================== show product page===============//
-app.get('/showproduct',(req,res)=>{
-    
-    res.render('showproduct',{login:req.session.user, products: products})
-
+app.get('/showproduct/:id',(req,res)=>{
+    dataModule.getProduct(req.params.id).then(product =>{
+        res.render('showproduct',{login:req.session.user, products: product})
+    }).catch(error => {
+        res.send(error);
+    })
 })
 //==================shopping_card page================//
 app.get('/shoppingcard',(req,res)=>{

@@ -282,7 +282,13 @@ function getProduct (id) {
             Products.findOne({
                 _id: id
             }).then(product => {
-                resolve(product)
+                if(product){
+                    product.id == product._id
+                    resolve(product)
+                } else {
+                    reject(new Error ('can not find product with this id'))
+                }
+                
             }).catch(error => {
                 reject(error)
             })
@@ -291,25 +297,38 @@ function getProduct (id) {
         })
     })
 }
-//========================================================//
- delete Product 
- function deleteProduct(productId,userId) {
-     return new Promise((resolve,reject)=>{
-        getProduct(productId).then(product=>{
-            //delete imgs from publics folder
-            if (product.userid==userId) {
-                product.imgs.forEach(img => {
-                    if(fs.existsSync('./public'+ img)){
-                        fs.unlinkSync('./public'+img)
-                    }
-                });  
-                // deleting the product from Database( products) the database name 
-                Products.deleteOne()
 
+//========================================================//
+ //delete Product 
+ function deleteProduct(productid, userid) {
+    return new Promise((resolve, reject) => {
+        getProduct(productid).then(product => {
+            console.log(product);
+
+            if (product.userid === userid) {
+
+                product.imgs.forEach(img => {
+
+                    if (fs.existsSync('./public' + img)){
+                        fs.unlinkSync('./public' + img)
+                    }
+                })
+                    Products.deleteOne({_id: productid}).then(() => {
+
+                        resolve()
+                    }).catch(error => {
+
+                        reject(error)
+                    })
+
+            } else {
+                reject(new Error('the user is not correct'))
             }
+        }).catch(error => {
+            reject(error)
         })
-     })
- }
+    })
+  }
 
 
 module.exports = {
