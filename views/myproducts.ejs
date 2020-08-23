@@ -169,6 +169,7 @@
                 e.preventDefault()
                 $('#deleteConfirmModal').modal('show')
                 productid = e.target.getAttribute('productid')
+                console.log(typeof productid);
             })
         })
         document.querySelector('#deleteProductBtn').addEventListener('click', (e) => {
@@ -179,9 +180,9 @@
                     'Content-type':'application/json'
                 },
                 body: JSON.stringify({productid})
-                
+           
             }).then(response => {
-                console.log(productid);
+                console.log(typeof productid);
                 $('#deleteConfirmModal').modal('hide')
                 if(response.status == 200) {
                     

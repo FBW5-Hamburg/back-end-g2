@@ -80,9 +80,10 @@ adminRouter.get('/myproducts', (req, res) => {
     })
 })
 //===========================================//
-adminRouter.post('/deleteproduct', (req, res) => {
+adminRouter.post('/deleteProduct', (req, res) => {
     console.log(req.body.productid);
     const productid = req.body.productid
+    console.log(typeof productid);
     dataModule.deleteProduct(productid, req.session.user._id).then(() => {
         res.json(1)
     }).catch(error => {

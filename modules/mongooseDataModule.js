@@ -7,7 +7,7 @@ const fs = require('fs')
 const mongoose = require('mongoose')
 // getting connection string from data base
 
-const connectionString = 'mongodb+srv://FBW-5:yZiPlwogw25pajKs@cluster0.26nmv.mongodb.net/test2?retryWrites=true&w=majority'
+const connectionString = 'mongodb+srv://user1:Bashar123456@cluster0.jufz4.mongodb.net/test1?retryWrites=true&w=majority'
 
 const Schema = mongoose.Schema
 
