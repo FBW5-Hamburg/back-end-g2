@@ -54,9 +54,9 @@ app.post('/contact',(req,res)=>{
     if(name != "" && name.length < 100 ){
         emailSender.sendEmail(name, email,message, (ok) => {
             if(ok){
-                res.sendStatus(200);
+                res.json(1)
             } else{
-                res.sendStatus(500);
+                res.json(2)
             }
         });
     }

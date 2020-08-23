@@ -39,11 +39,13 @@
  <p>loguot function</p>
  <p>filter function </p>
  <p>Github work/as Admin</p>
+  <p>heroku work/as Admin</p>
  </li>  
   <li>Abd Alrahman:
   <p>add product function/add the products to data base </p>
   <p>Delete pruduct function </p>
   <p>github work/as Admin</p>
+  <p>heroku work/as Admin</p>
   <p></p>
   </li>  
    <li>Wael:</li>  

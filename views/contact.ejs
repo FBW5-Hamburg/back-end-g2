@@ -183,14 +183,15 @@
                      method: 'POST',
                      body: fd }
                     ).then(response=>{
-                        if (response.status==200) {
-                            alert('success send')
+                        console.log(response.status);
+                        if (1) {
+                          alert('success send')
                             nameInput.value=''
                             emailInput.value=''
                             messageText.value=''
                             
                         }else{
-                            alert('success send')
+                              alert('error send')
                         }
                     }).catch(error=>{
                         console.log(error);
