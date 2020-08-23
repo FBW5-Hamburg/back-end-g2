@@ -5,7 +5,7 @@ const session = require('express-session')
 
 const adminRouter = require('./routes/adminRoutes')
 const customerRoutes=require('./routes/customerRoutes')
-
+const emailSender = require('./modules/emailSender')
 const fileupload = require('express-fileupload')
 const cookie = require('cookie-parser')
 const fs = require('fs')
@@ -44,7 +44,22 @@ res.render('index',{login: req.session.user})
 
 //==========================//
 app.get('/contact',(req,res)=>{
-    res.render('contact',{login: req.session.user})
+    res.render('contact',{login: req.session.user,send:1})
+})
+app.post('/contact',(req,res)=>{
+    console.log(req.body);
+    const name = req.body.name
+    const email = req.body.email
+    const message = req.body.message
+    if(name != "" && name.length < 100 ){
+        emailSender.sendEmail(name, email,message, (ok) => {
+            if(ok){
+                res.sendStatus(200);
+            } else{
+                res.sendStatus(500);
+            }
+        });
+    }
 })
 //=======================shop ============================//
 app.get('/shop',(req,res)=>{

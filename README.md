@@ -38,12 +38,12 @@
  <p>Login Page/find the user if is admin or not in Database</p>
  <p>loguot function</p>
  <p>filter function </p>
- <p>Github work</p>
+ <p>Github work/as Admin</p>
  </li>  
   <li>Abd Alrahman:
   <p>add product function/add the products to data base </p>
   <p>Delete pruduct function </p>
-  <p>github work</p>
+  <p>github work/as Admin</p>
   <p></p>
   </li>  
    <li>Wael:</li>  
