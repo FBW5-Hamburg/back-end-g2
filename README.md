@@ -11,7 +11,7 @@
 <ul>
 <li>Name</li>
 <li>Email address</li>
-<li>Passowrd</li>
+<li>Password</li>
 </ul>
 # Technical Description
 <h3>Platform</h3>
